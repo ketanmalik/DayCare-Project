@@ -20,19 +20,17 @@ public class StudentFactory extends AbstractPersonFactory {
     public AbstractPerson getObject(ResultSet csvData) {
 
         try {
-                String name = csvData.getString("name");
-                int age = csvData.getInt("age");
-                String fName = csvData.getString("fName");
-                String mName = csvData.getString("mName");
-                String address = csvData.getString("address");
-                String phone = csvData.getString("phone");
-                double grade = csvData.getDouble("grade");
-                AbstractPerson student = new Student(name, age, fName, mName, address, phone, grade);
-                return student;
+            String name = csvData.getString("name");
+            int age = csvData.getInt("age");
+            String fName = csvData.getString("fName");
+            String mName = csvData.getString("mName");
+            String address = csvData.getString("address");
+            String phone = csvData.getString("phone");
+            double grade = csvData.getDouble("grade");
+            return new Student(name, age, fName, mName, address, phone, grade);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return null;
     }
 

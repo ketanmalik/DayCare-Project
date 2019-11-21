@@ -12,11 +12,21 @@ package Business.Entities;
 public class Teacher extends AbstractPerson {
 
     private double credits;
+    private String category;
 
-    public Teacher(String name, int age, double credits) {
+    public Teacher(String name, int age, double credits, String category) {
         this.name = name;
         this.age = age;
         this.credits = credits;
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public double getCredits() {
