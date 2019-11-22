@@ -5,6 +5,9 @@
  */
 package Business.Entities;
 
+import java.util.Map;
+import java.util.HashMap;
+
 /**
  *
  * @author ketanmalik
@@ -16,6 +19,7 @@ public class Student extends AbstractPerson {
     private String address;
     private String phone;
     private double grade;
+    private Map<String, String> vaccinationRecord;
 
     public Student(String name, int age, String fathersName, String mothersName, String address, String phone, double grade) {
         this.name = name;
@@ -25,6 +29,7 @@ public class Student extends AbstractPerson {
         this.address = address;
         this.phone = phone;
         this.grade = grade;
+        vaccinationRecord = new HashMap<>();
     }
 
     public String getFathersName() {
@@ -65,6 +70,14 @@ public class Student extends AbstractPerson {
 
     public void setGrade(double grade) {
         this.grade = grade;
+    }
+
+    public Map<String, String> getVaccinationRecord() {
+        return vaccinationRecord;
+    }
+
+    public void setVaccinationRecord(Map<String, String> vaccinationRecord) {
+        this.vaccinationRecord = vaccinationRecord;
     }
 
     @Override
