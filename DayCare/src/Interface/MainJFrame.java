@@ -5,7 +5,6 @@
  */
 package Interface;
 
-import Business.Configuration.ConfigureDayCare;
 import java.awt.Color;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
@@ -19,11 +18,9 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    private ConfigureDayCare configureDayCare;
 
     public MainJFrame() {
         initComponents();
-        configureDayCare = new ConfigureDayCare();
         signInButton.setOpaque(false);
         signInButton.setContentAreaFilled(false);
         signInButton.setBorderPainted(false);
@@ -49,7 +46,7 @@ public class MainJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(60, 169, 174));
 
-        loginPanel.setBackground(new java.awt.Color(0, 183, 242));
+        loginPanel.setBackground(new java.awt.Color(0, 161, 219));
 
         titleLabel.setFont(new java.awt.Font("Arial", 1, 30)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -98,14 +95,15 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(signInButton)
-                            .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(usernameTxtField)
-                                .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usernameTxtField)
+                            .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(loginPanelLayout.createSequentialGroup()
                         .addGap(360, 360, 360)
-                        .addComponent(titleLabel)))
+                        .addComponent(titleLabel))
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(427, 427, 427)
+                        .addComponent(signInButton)))
                 .addContainerGap(385, Short.MAX_VALUE))
         );
         loginPanelLayout.setVerticalGroup(
@@ -121,9 +119,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(54, 54, 54)
+                .addGap(41, 41, 41)
                 .addComponent(signInButton)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(335, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

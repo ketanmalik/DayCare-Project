@@ -41,7 +41,7 @@ public class StudentFactory extends AbstractPersonFactory {
             student.getVaccinationRecord().put("Polio", polio);
             student.getVaccinationRecord().put("HepatitisB", hepatitisB);
             student.getVaccinationRecord().put("MMR", mmr);
-            student.getVaccinationRecord().put("Vericella", varicella);
+            student.getVaccinationRecord().put("Varicella", varicella);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
