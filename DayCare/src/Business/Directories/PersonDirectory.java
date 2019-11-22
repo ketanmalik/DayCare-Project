@@ -5,7 +5,8 @@
  */
 package Business.Directories;
 
-import Business.Entities.AbstractPerson;
+import Business.Entities.Student;
+import Business.Entities.Teacher;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,8 @@ import java.util.List;
  */
 public class PersonDirectory {
 
-    private List<AbstractPerson> studentDirectory;
-    private List<AbstractPerson> teacherDirectory;
+    private List<Student> studentDirectory;
+    private List<Teacher> teacherDirectory;
     private static PersonDirectory personDirectoryObject = null; 
 
     private PersonDirectory() {
@@ -31,19 +32,19 @@ public class PersonDirectory {
         return personDirectoryObject;
     }
 
-    public List<AbstractPerson> getStudentDirectory() {
+    public List<Student> getStudentDirectory() {
         return studentDirectory;
     }
 
-    public void setStudentDirectory(List<AbstractPerson> studentDirectory) {
+    public void setStudentDirectory(List<Student> studentDirectory) {
         this.studentDirectory = studentDirectory;
     }
 
-    public List<AbstractPerson> getTeacherDirectory() {
+    public List<Teacher> getTeacherDirectory() {
         return teacherDirectory;
     }
 
-    public void setTeacherDirectory(List<AbstractPerson> teacherDirectory) {
+    public void setTeacherDirectory(List<Teacher> teacherDirectory) {
         this.teacherDirectory = teacherDirectory;
     }
 

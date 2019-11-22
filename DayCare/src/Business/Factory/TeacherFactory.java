@@ -22,7 +22,8 @@ public class TeacherFactory extends AbstractPersonFactory {
             String name = csvData.getString("name");
             int age = csvData.getInt("age");
             double credits = csvData.getDouble("credits");
-            AbstractPerson teacher = new Teacher(name, age, credits);
+            String category = csvData.getString("category");
+            AbstractPerson teacher = new Teacher(name, age, credits, category);
             return teacher;
 
         } catch (SQLException ex) {

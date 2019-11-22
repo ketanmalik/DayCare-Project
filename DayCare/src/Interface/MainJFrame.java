@@ -6,6 +6,9 @@
 package Interface;
 
 import Business.Configuration.ConfigureDayCare;
+import java.awt.Color;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,9 +19,14 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    private ConfigureDayCare configureDayCare;
+
     public MainJFrame() {
         initComponents();
-        new ConfigureDayCare();
+        configureDayCare = new ConfigureDayCare();
+        signInButton.setOpaque(false);
+        signInButton.setContentAreaFilled(false);
+        signInButton.setBorderPainted(false);
     }
 
     /**
@@ -30,21 +38,138 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        loginPanel = new javax.swing.JPanel();
+        titleLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        usernameTxtField = new javax.swing.JTextField();
+        passwordTxtField = new javax.swing.JPasswordField();
+        signInButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(60, 169, 174));
+
+        loginPanel.setBackground(new java.awt.Color(0, 183, 242));
+
+        titleLabel.setFont(new java.awt.Font("Arial", 1, 30)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(51, 51, 51));
+        titleLabel.setText("Boston Day Care");
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Password:");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Username:");
+
+        usernameTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameTxtFieldActionPerformed(evt);
+            }
+        });
+
+        signInButton.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        signInButton.setForeground(new java.awt.Color(255, 255, 255));
+        signInButton.setText("Sign In");
+        signInButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                signInButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                signInButtonMouseEntered(evt);
+            }
+        });
+        signInButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signInButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
+        loginPanel.setLayout(loginPanelLayout);
+        loginPanelLayout.setHorizontalGroup(
+            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginPanelLayout.createSequentialGroup()
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(345, 345, 345)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(signInButton)
+                            .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(usernameTxtField)
+                                .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(360, 360, 360)
+                        .addComponent(titleLabel)))
+                .addContainerGap(385, Short.MAX_VALUE))
+        );
+        loginPanelLayout.setVerticalGroup(
+            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginPanelLayout.createSequentialGroup()
+                .addGap(232, 232, 232)
+                .addComponent(titleLabel)
+                .addGap(54, 54, 54)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usernameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(54, 54, 54)
+                .addComponent(signInButton)
+                .addContainerGap(322, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
+
+        String username = usernameTxtField.getText();
+        char[] password = passwordTxtField.getPassword();
+        char[] correctPassword = new char[]{'A', 'd', 'm', 'i', 'n'};
+        for (int i = 0; i < password.length; i++) {
+            System.out.print(password[i]);
+        }
+        System.out.println(Arrays.equals(password, correctPassword));
+        if (username.equals("Admin") && Arrays.equals(password, correctPassword)) {
+            HomePage homePage = new HomePage();
+            this.setVisible(false);
+            homePage.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please enter valid username and password", "Invalid User", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_signInButtonActionPerformed
+
+    private void usernameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTxtFieldActionPerformed
+
+    }//GEN-LAST:event_usernameTxtFieldActionPerformed
+
+    private void signInButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signInButtonMouseEntered
+        signInButton.setForeground(Color.black);
+    }//GEN-LAST:event_signInButtonMouseEntered
+
+    private void signInButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signInButtonMouseExited
+        signInButton.setForeground(Color.white);
+
+    }//GEN-LAST:event_signInButtonMouseExited
 
     /**
      * @param args the command line arguments
@@ -76,12 +201,19 @@ public class MainJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainJFrame().setVisible(true);
+                MainJFrame mainJFrame = new MainJFrame();
+                mainJFrame.setVisible(true);
             }
         });
-//        new ConfigureDayCare();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel loginPanel;
+    private javax.swing.JPasswordField passwordTxtField;
+    private javax.swing.JButton signInButton;
+    private javax.swing.JLabel titleLabel;
+    private javax.swing.JTextField usernameTxtField;
     // End of variables declaration//GEN-END:variables
 }

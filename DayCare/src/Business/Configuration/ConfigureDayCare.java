@@ -5,12 +5,22 @@
  */
 package Business.Configuration;
 
+import Business.Directories.ClassroomDirectory;
 import Business.Directories.PersonDirectory;
+import Business.Directories.TeacherStudentDirectory;
 import Business.Entities.AbstractPerson;
-import Business.Factory.AbstractPersonFactory;
+import Business.Entities.Classroom;
+import Business.Entities.Student;
+import Business.Entities.Teacher;
+import Business.Factory.ClassroomFactory;
 import Business.Factory.StudentFactory;
 import Business.Factory.TeacherFactory;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,17 +30,22 @@ import javax.swing.JOptionPane;
 public class ConfigureDayCare {
 
     private static PersonDirectory personDirectory;
+    private static TeacherStudentDirectory teacherStudentGroup;
     private static ResultSet teacherResultSet;
     private static ResultSet studentResultSet;
+    private static ClassroomDirectory classroomDirectoryObj;
 
     public ConfigureDayCare() {
         personDirectory = PersonDirectory.getObject();
+        teacherStudentGroup = TeacherStudentDirectory.getObject();
         runConfiguration();
-        System.out.println("Business.Configuration.ConfigureDayCare.<init>()");
     }
 
     public final void runConfiguration() {
         initializeDatabase();
+        initializeStudentTeacherGroup();
+        initializeClassroomGroup();
+        initializeAlerts();
     }
 
     public final void initializeDatabase() {
@@ -61,9 +76,9 @@ public class ConfigureDayCare {
     public final void createStudentObjects(ResultSet studentResultSet) {
         try {
             while (studentResultSet.next()) {
-                AbstractPersonFactory studentFactory = new StudentFactory();
+                StudentFactory studentFactory = new StudentFactory();
                 AbstractPerson studentObj = studentFactory.getObject(studentResultSet);
-                personDirectory.getStudentDirectory().add(studentObj);
+                personDirectory.getStudentDirectory().add((Student) studentObj);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,13 +89,149 @@ public class ConfigureDayCare {
     public final void createTeacherObjects(ResultSet teacherResultSet) {
         try {
             while (teacherResultSet.next()) {
-                AbstractPersonFactory teacherFactory = new TeacherFactory();
+                TeacherFactory teacherFactory = new TeacherFactory();
                 AbstractPerson teacherObj = teacherFactory.getObject(teacherResultSet);
-                personDirectory.getTeacherDirectory().add(teacherObj);
+                personDirectory.getTeacherDirectory().add((Teacher) teacherObj);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Failed to load Teacher data");
         }
+    }
+
+    public final void initializeStudentTeacherGroup() {
+        List<Student> tempList = new ArrayList<>();
+
+        tempList = personDirectory.getStudentDirectory().stream()
+                .filter(e -> e.getAge() >= 6 && e.getAge() <= 12)
+                .collect(Collectors.toList());
+
+        for (Teacher t : personDirectory.getTeacherDirectory()) {
+            if (t.getCategory().equalsIgnoreCase("6-12")) {
+                Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                tempMap.put(t, tempList);
+                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                break;
+            }
+        }
+
+        tempList = personDirectory.getStudentDirectory().stream()
+                .filter(e -> e.getAge() >= 13 && e.getAge() <= 24)
+                .collect(Collectors.toList());
+
+        for (Teacher t : personDirectory.getTeacherDirectory()) {
+            if (t.getCategory().equalsIgnoreCase("13-24")) {
+                Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                tempMap.put(t, tempList);
+                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                break;
+            }
+        }
+
+        tempList = personDirectory.getStudentDirectory().stream()
+                .filter(e -> e.getAge() >= 25 && e.getAge() <= 35)
+                .collect(Collectors.toList());
+
+        for (Teacher t : personDirectory.getTeacherDirectory()) {
+            if (t.getCategory().equalsIgnoreCase("25-35")) {
+                Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                tempMap.put(t, tempList);
+                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                break;
+            }
+        }
+
+        tempList = personDirectory.getStudentDirectory().stream()
+                .filter(e -> e.getAge() >= 36 && e.getAge() <= 47)
+                .collect(Collectors.toList());
+
+        for (Teacher t : personDirectory.getTeacherDirectory()) {
+            if (t.getCategory().equalsIgnoreCase("36-47")) {
+                Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                tempMap.put(t, tempList);
+                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                break;
+            }
+        }
+
+        tempList = personDirectory.getStudentDirectory().stream()
+                .filter(e -> e.getAge() >= 48 && e.getAge() <= 59)
+                .collect(Collectors.toList());
+
+        for (Teacher t : personDirectory.getTeacherDirectory()) {
+            if (t.getCategory().equalsIgnoreCase("48-59")) {
+                Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                tempMap.put(t, tempList);
+                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                break;
+            }
+        }
+
+        tempList = personDirectory.getStudentDirectory().stream()
+                .filter(e -> e.getAge() >= 60)
+                .collect(Collectors.toList());
+
+        for (Teacher t : personDirectory.getTeacherDirectory()) {
+            if (t.getCategory().equalsIgnoreCase("60")) {
+                Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                tempMap.put(t, tempList);
+                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                break;
+            }
+        }
+    }
+
+    public final void initializeClassroomGroup() {
+        ClassroomFactory classroomFactory = new ClassroomFactory();
+        Classroom c1 = classroomFactory.getObj("1", 12);
+        Classroom c2 = classroomFactory.getObj("2", 15);
+        Classroom c3 = classroomFactory.getObj("3", 18);
+        Classroom c4 = classroomFactory.getObj("4", 24);
+        Classroom c5 = classroomFactory.getObj("5", 24);
+        Classroom c6 = classroomFactory.getObj("6", 30);
+
+        c1.getClassGroup().put("1A", teacherStudentGroup.getTeacherStudentGroup().get(0));
+        c2.getClassGroup().put("2A", teacherStudentGroup.getTeacherStudentGroup().get(1));
+        c3.getClassGroup().put("3A", teacherStudentGroup.getTeacherStudentGroup().get(2));
+        c4.getClassGroup().put("4A", teacherStudentGroup.getTeacherStudentGroup().get(3));
+        c5.getClassGroup().put("5A", teacherStudentGroup.getTeacherStudentGroup().get(4));
+        c6.getClassGroup().put("6A", teacherStudentGroup.getTeacherStudentGroup().get(5));
+
+        classroomDirectoryObj = ClassroomDirectory.getObject();
+        classroomDirectoryObj.getClassroomDirectory().add(c1);
+        classroomDirectoryObj.getClassroomDirectory().add(c2);
+        classroomDirectoryObj.getClassroomDirectory().add(c3);
+        classroomDirectoryObj.getClassroomDirectory().add(c4);
+        classroomDirectoryObj.getClassroomDirectory().add(c5);
+        classroomDirectoryObj.getClassroomDirectory().add(c6);
+    }
+
+    public final void initializeAlerts() {
+        for (Student s : personDirectory.getStudentDirectory()) {
+            if (s.getName().equals("Jimmy")) {
+                createUpcomingAlerts(s);
+            }
+        }
+    }
+
+    public final void createUpcomingAlerts(Student s) {
+        int cursor = 1;
+        String[] fields = s.getVaccinationRecord().get("Hib").split(",");
+        for (String str : fields) {
+            if (str.equals("delay")) {
+
+            } else if (str.equals("na")) {
+
+            } else {
+                if (Integer.parseInt(str) > s.getAge()) {
+                    System.out.println(s);
+                    System.out.println(cursor);
+                }
+            }
+            cursor += 1;
+        }
+        cursor = 1;
+        fields = s.getVaccinationRecord().get("MMR").split(",");
+
     }
 }
