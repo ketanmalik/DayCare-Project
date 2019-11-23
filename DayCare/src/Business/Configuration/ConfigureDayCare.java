@@ -44,8 +44,6 @@ public class ConfigureDayCare {
     public final void runConfiguration() {
         initializeDatabase();
         initializeStudentTeacherGroup();
-        initializeClassroomGroup();
-        initializeAlerts();
     }
 
     public final void initializeDatabase() {
@@ -204,34 +202,5 @@ public class ConfigureDayCare {
         classroomDirectoryObj.getClassroomDirectory().add(c4);
         classroomDirectoryObj.getClassroomDirectory().add(c5);
         classroomDirectoryObj.getClassroomDirectory().add(c6);
-    }
-
-    public final void initializeAlerts() {
-        for (Student s : personDirectory.getStudentDirectory()) {
-            if (s.getName().equals("Jimmy")) {
-                createUpcomingAlerts(s);
-            }
-        }
-    }
-
-    public final void createUpcomingAlerts(Student s) {
-        int cursor = 1;
-        String[] fields = s.getVaccinationRecord().get("Hib").split(",");
-        for (String str : fields) {
-            if (str.equals("delay")) {
-
-            } else if (str.equals("na")) {
-
-            } else {
-                if (Integer.parseInt(str) > s.getAge()) {
-                    System.out.println(s);
-                    System.out.println(cursor);
-                }
-            }
-            cursor += 1;
-        }
-        cursor = 1;
-        fields = s.getVaccinationRecord().get("MMR").split(",");
-
     }
 }
