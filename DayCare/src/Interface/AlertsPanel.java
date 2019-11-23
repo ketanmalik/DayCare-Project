@@ -8,7 +8,6 @@ package Interface;
 import Business.Directories.PersonDirectory;
 import Business.Entities.Student;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -20,12 +19,18 @@ public class AlertsPanel extends javax.swing.JPanel {
      * Creates new form AlertsPanel
      */
     private static PersonDirectory pd;
-    DefaultTableModel dtm;
+    DefaultTableModel dtmUpper;
+    DefaultTableModel dtmLower;
 
     public AlertsPanel() {
         initComponents();
         pd = PersonDirectory.getObject();
         populateImmunizationTable();
+        alertaTitleLabel.setText("Immunization Alerts");
+        adminAlertsBtn.setEnabled(true);
+        immuneAlertsBtn.setEnabled(false);
+        upperTableLabel.setText("Overdue:");
+        lowerTableLabel.setText("Upcoming:");
     }
 
     /**
@@ -40,11 +45,12 @@ public class AlertsPanel extends javax.swing.JPanel {
         immuneAlertsBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         overdueAlertsTable = new javax.swing.JTable();
-        adminAlertsBtn1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        adminAlertsBtn = new javax.swing.JButton();
+        upperTableLabel = new javax.swing.JLabel();
+        lowerTableLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         upcomingAlertsTable = new javax.swing.JTable();
+        alertaTitleLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -56,6 +62,7 @@ public class AlertsPanel extends javax.swing.JPanel {
             }
         });
 
+        overdueAlertsTable.setAutoCreateRowSorter(true);
         overdueAlertsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -80,21 +87,21 @@ public class AlertsPanel extends javax.swing.JPanel {
             overdueAlertsTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        adminAlertsBtn1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        adminAlertsBtn1.setText("View Administrative Alerts");
-        adminAlertsBtn1.addActionListener(new java.awt.event.ActionListener() {
+        adminAlertsBtn.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        adminAlertsBtn.setText("View Administrative Alerts");
+        adminAlertsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminAlertsBtn1ActionPerformed(evt);
+                adminAlertsBtnActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Overdue:");
+        upperTableLabel.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        upperTableLabel.setForeground(new java.awt.Color(255, 255, 255));
+        upperTableLabel.setText("Overdue:");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Upcoming:");
+        lowerTableLabel.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        lowerTableLabel.setForeground(new java.awt.Color(255, 255, 255));
+        lowerTableLabel.setText("Upcoming:");
 
         upcomingAlertsTable.setAutoCreateRowSorter(true);
         upcomingAlertsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -121,6 +128,10 @@ public class AlertsPanel extends javax.swing.JPanel {
             upcomingAlertsTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        alertaTitleLabel.setFont(new java.awt.Font("Arial", 2, 25)); // NOI18N
+        alertaTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        alertaTitleLabel.setText("Administrative Alerts");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,34 +140,39 @@ public class AlertsPanel extends javax.swing.JPanel {
                 .addContainerGap(110, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(immuneAlertsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(adminAlertsBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(adminAlertsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(121, 121, 121)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(upperTableLabel)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
+                    .addComponent(lowerTableLabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(95, 95, 95))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(343, 343, 343)
+                .addComponent(alertaTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(177, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addContainerGap(98, Short.MAX_VALUE)
+                .addComponent(alertaTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(upperTableLabel)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
+                        .addGap(126, 126, 126)
                         .addComponent(immuneAlertsBtn))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(adminAlertsBtn1))
+                        .addComponent(adminAlertsBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(jLabel2)
+                        .addComponent(lowerTableLabel)
                         .addGap(6, 6, 6)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(211, 211, 211))
@@ -164,24 +180,21 @@ public class AlertsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void populateImmunizationTable() {
-        getImmunizationAlerts();
+        dtmUpper = (DefaultTableModel) overdueAlertsTable.getModel();
+        dtmLower = (DefaultTableModel) upcomingAlertsTable.getModel();
 
-    }
-
-    private void sort() {
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dtm);
-        upcomingAlertsTable.setRowSorter(sorter);
-    }
-
-    private void getImmunizationAlerts() {
-        dtm = (DefaultTableModel) upcomingAlertsTable.getModel();
-
-        dtm.setRowCount(0);
+        dtmUpper.setRowCount(0);
+        dtmLower.setRowCount(0);
         for (Student s : pd.getStudentDirectory()) {
             String[] dates = s.getVaccinationRecord().get("Hib").split(",");
             for (String date : dates) {
                 if (date.equals("delay")) {
-
+                    Object[] row = new Object[4];
+                    row[0] = s;
+                    row[1] = s.getAge();
+                    row[2] = "Hib";
+                    row[3] = -1;
+                    dtmUpper.addRow(row);
                 } else if (date.equals("na")) {
 
                 } else {
@@ -191,7 +204,7 @@ public class AlertsPanel extends javax.swing.JPanel {
                         row[1] = s.getAge();
                         row[2] = "Hib";
                         row[3] = Integer.parseInt(date) - s.getAge();
-                        dtm.addRow(row);
+                        dtmLower.addRow(row);
                     }
                 }
             }
@@ -199,7 +212,12 @@ public class AlertsPanel extends javax.swing.JPanel {
             dates = s.getVaccinationRecord().get("DTaP").split(",");
             for (String date : dates) {
                 if (date.equals("delay")) {
-
+                    Object[] row = new Object[4];
+                    row[0] = s;
+                    row[1] = s.getAge();
+                    row[2] = "DTaP";
+                    row[3] = 12;
+                    dtmUpper.addRow(row);
                 } else if (date.equals("na")) {
 
                 } else {
@@ -209,14 +227,19 @@ public class AlertsPanel extends javax.swing.JPanel {
                         row[1] = s.getAge();
                         row[2] = "DTaP";
                         row[3] = Integer.parseInt(date) - s.getAge();
-                        dtm.addRow(row);
+                        dtmLower.addRow(row);
                     }
                 }
             }
             dates = s.getVaccinationRecord().get("Polio").split(",");
             for (String date : dates) {
                 if (date.equals("delay")) {
-
+                    Object[] row = new Object[4];
+                    row[0] = s;
+                    row[1] = s.getAge();
+                    row[2] = "Polio";
+                    row[3] = 12;
+                    dtmUpper.addRow(row);
                 } else if (date.equals("na")) {
 
                 } else {
@@ -226,14 +249,19 @@ public class AlertsPanel extends javax.swing.JPanel {
                         row[1] = s.getAge();
                         row[2] = "Polio";
                         row[3] = Integer.parseInt(date) - s.getAge();
-                        dtm.addRow(row);
+                        dtmLower.addRow(row);
                     }
                 }
             }
             dates = s.getVaccinationRecord().get("HepatitisB").split(",");
             for (String date : dates) {
                 if (date.equals("delay")) {
-
+                    Object[] row = new Object[4];
+                    row[0] = s;
+                    row[1] = s.getAge();
+                    row[2] = "Hepatitis B";
+                    row[3] = 12;
+                    dtmUpper.addRow(row);
                 } else if (date.equals("na")) {
 
                 } else {
@@ -243,14 +271,19 @@ public class AlertsPanel extends javax.swing.JPanel {
                         row[1] = s.getAge();
                         row[2] = "Hepatitis B";
                         row[3] = Integer.parseInt(date) - s.getAge();
-                        dtm.addRow(row);
+                        dtmLower.addRow(row);
                     }
                 }
             }
             dates = s.getVaccinationRecord().get("MMR").split(",");
             for (String date : dates) {
                 if (date.equals("delay")) {
-
+                    Object[] row = new Object[4];
+                    row[0] = s;
+                    row[1] = s.getAge();
+                    row[2] = "MMR";
+                    row[3] = 12;
+                    dtmUpper.addRow(row);
                 } else if (date.equals("na")) {
 
                 } else {
@@ -260,14 +293,19 @@ public class AlertsPanel extends javax.swing.JPanel {
                         row[1] = s.getAge();
                         row[2] = "MMR";
                         row[3] = Integer.parseInt(date) - s.getAge();
-                        dtm.addRow(row);
+                        dtmLower.addRow(row);
                     }
                 }
             }
             dates = s.getVaccinationRecord().get("Varicella").split(",");
             for (String date : dates) {
                 if (date.equals("delay")) {
-
+                    Object[] row = new Object[4];
+                    row[0] = s;
+                    row[1] = s.getAge();
+                    row[2] = "Varicella";
+                    row[3] = 12;
+                    dtmUpper.addRow(row);
                 } else if (date.equals("na")) {
 
                 } else {
@@ -277,29 +315,39 @@ public class AlertsPanel extends javax.swing.JPanel {
                         row[1] = s.getAge();
                         row[2] = "Varicella";
                         row[3] = Integer.parseInt(date) - s.getAge();
-                        dtm.addRow(row);
+                        dtmLower.addRow(row);
                     }
                 }
             }
         }
     }
+
     private void immuneAlertsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immuneAlertsBtnActionPerformed
-        // TODO add your handling code here:
+        alertaTitleLabel.setText("Immunization Alerts");
+        adminAlertsBtn.setEnabled(true);
+        immuneAlertsBtn.setEnabled(false);
+        upperTableLabel.setText("Overdue:");
+        lowerTableLabel.setText("Upcoming:");
     }//GEN-LAST:event_immuneAlertsBtnActionPerformed
 
-    private void adminAlertsBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminAlertsBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_adminAlertsBtn1ActionPerformed
+    private void adminAlertsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminAlertsBtnActionPerformed
+        alertaTitleLabel.setText("Administrative Alerts");
+        adminAlertsBtn.setEnabled(false);
+        immuneAlertsBtn.setEnabled(true);
+        upperTableLabel.setText("Overdue:");
+        lowerTableLabel.setText("Upcoming:");
+    }//GEN-LAST:event_adminAlertsBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton adminAlertsBtn1;
+    private javax.swing.JButton adminAlertsBtn;
+    private javax.swing.JLabel alertaTitleLabel;
     private javax.swing.JButton immuneAlertsBtn;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lowerTableLabel;
     private javax.swing.JTable overdueAlertsTable;
     private javax.swing.JTable upcomingAlertsTable;
+    private javax.swing.JLabel upperTableLabel;
     // End of variables declaration//GEN-END:variables
 }
