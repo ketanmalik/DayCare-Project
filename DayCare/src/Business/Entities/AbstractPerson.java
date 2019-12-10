@@ -11,9 +11,14 @@ package Business.Entities;
  */
 public abstract class AbstractPerson {
 
+    public int id;
     public String name;
     public int age;
 
+    public abstract int getId();
+    
+    public abstract void setId();
+    
     public abstract String getName();
 
     public abstract void setName(String name);

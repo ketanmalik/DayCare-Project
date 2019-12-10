@@ -51,19 +51,18 @@ public class ConfigureDayCare {
                 // Step 1: Allocate a database 'Connection' object
                 Connection connection = DriverManager.getConnection(
                         "jdbc:mysql://localhost:3306/DayCare?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-                        "myuser", "user"); // For MySQL only
+                        "myuser", "myuser"); // For MySQL only
                 // The format is: "jdbc:mysql://hostname:port/databaseName", "username", "password"
 
                 // Step 2: Allocate a 'Statement' object in the Connection
                 Statement statement = connection.createStatement();) {
             // Step 3: Execute a SQL SELECT query. The query result is returned in a 'ResultSet' object.
-            String studentData = "select * from StudentData";
+            String studentData = "select * from studentdata";
             studentResultSet = statement.executeQuery(studentData);
             createStudentObjects(studentResultSet);
-
-            String teacherData = "select * from TeacherData";
-            teacherResultSet = statement.executeQuery(teacherData);
-            createTeacherObjects(teacherResultSet);
+//            String teacherData = "select * from TeacherData";
+//            teacherResultSet = statement.executeQuery(teacherData);
+//            createTeacherObjects(teacherResultSet);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -75,7 +74,7 @@ public class ConfigureDayCare {
         try {
             while (studentResultSet.next()) {
                 StudentFactory studentFactory = new StudentFactory();
-                AbstractPerson studentObj = studentFactory.getObject(studentResultSet);
+                AbstractPerson studentObj = studentFactory.getObjectFromDB(studentResultSet);
                 personDirectory.getStudentDirectory().add((Student) studentObj);
             }
         } catch (SQLException e) {
@@ -88,7 +87,7 @@ public class ConfigureDayCare {
         try {
             while (teacherResultSet.next()) {
                 TeacherFactory teacherFactory = new TeacherFactory();
-                AbstractPerson teacherObj = teacherFactory.getObject(teacherResultSet);
+                AbstractPerson teacherObj = teacherFactory.getObjectFromDB(teacherResultSet);
                 personDirectory.getTeacherDirectory().add((Teacher) teacherObj);
             }
         } catch (SQLException e) {

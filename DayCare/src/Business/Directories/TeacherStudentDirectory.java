@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class TeacherStudentDirectory {
 
-//    private Map<AbstractPerson, List<Student>> teacherStudentGroup;
     private List<Map<Teacher, List<Student>>> teacherStudentGroup;
     private static TeacherStudentDirectory teacherStudentObj = null;
 

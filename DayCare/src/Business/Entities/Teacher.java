@@ -14,7 +14,8 @@ public class Teacher extends AbstractPerson {
     private double credits;
     private String category;
 
-    public Teacher(String name, int age, double credits, String category) {
+    public Teacher(int id, String name, int age, double credits, String category) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.credits = credits;
@@ -55,5 +56,15 @@ public class Teacher extends AbstractPerson {
     @Override
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId() {
+        this.id = id;
     }
 }

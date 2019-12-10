@@ -17,14 +17,14 @@ import java.sql.SQLException;
 public class TeacherFactory extends AbstractPersonFactory {
 
     @Override
-    public AbstractPerson getObject(ResultSet csvData) {
+    public AbstractPerson getObjectFromDB(ResultSet csvData) {
         try {
             String name = csvData.getString("name");
             int age = csvData.getInt("age");
             double credits = csvData.getDouble("credits");
             String category = csvData.getString("category");
-            AbstractPerson teacher = new Teacher(name, age, credits, category);
-            return teacher;
+//            AbstractPerson teacher = new Teacher(name, age, credits, category);
+            return null;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
