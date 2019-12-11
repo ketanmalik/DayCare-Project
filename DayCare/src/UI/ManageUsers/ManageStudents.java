@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.AddUsers;
+package UI.ManageUsers;
 
 import Business.Directories.PersonDirectory;
 import Business.Entities.AbstractPerson;
@@ -24,18 +24,17 @@ import javax.swing.JPanel;
  *
  * @author ketanmalik
  */
-public class AddStudent extends javax.swing.JPanel {
+public class ManageStudents extends javax.swing.JPanel {
 
     /**
-     * Creates new form AddStudent
+     * Creates new form ManageStudents
      */
     private JPanel displayPanel;
     private String mode = "";
     private PersonDirectory personDirectory;
     private Student student;
-    private String originalId;
 
-    public AddStudent(JPanel displayPanel, String mode, Student student) {
+    public ManageStudents(JPanel displayPanel, String mode, Student student) {
         initComponents();
         this.displayPanel = displayPanel;
         this.personDirectory = PersonDirectory.getObject();
@@ -53,7 +52,6 @@ public class AddStudent extends javax.swing.JPanel {
         } else if (mode.equals("update")) {
             pageTitle.setText("Update Student");
             enableFields(true);
-            originalId = String.valueOf(student.getId());
             idTxtField.setText(String.valueOf(student.getId()));
             updateFields();
         }
@@ -370,62 +368,6 @@ public class AddStudent extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(label)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(hib1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel11)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(hib2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel12)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(hib3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel13)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(hib4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel26)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(polio1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel18)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(dtap1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel14)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(dtap2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jLabel15)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(dtap3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jLabel16)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(dtap4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jLabel39)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(dtap5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel30)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(polio2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jLabel20)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(polio3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jLabel21)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(polio4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel28)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(hepatitisb1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -448,21 +390,79 @@ public class AddStudent extends javax.swing.JPanel {
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(mmr1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel24)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(mmr2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jLabel35)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(varicella2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))))))
+                                                        .addComponent(varicella2, 0, 65, Short.MAX_VALUE))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(jLabel24)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(mmr2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                        .addComponent(label)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(hib1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(jLabel11)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(hib2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(jLabel12)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(hib3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(jLabel13)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(hib4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel26)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(polio1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel18)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(dtap1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel14)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(dtap2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jLabel15)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(dtap3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jLabel16)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(dtap4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel30)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(polio2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jLabel20)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(polio3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jLabel21)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(polio4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel39)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(dtap5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(backBtn2)
                         .addGap(398, 398, 398)
                         .addComponent(pageTitle)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -699,50 +699,48 @@ public class AddStudent extends javax.swing.JPanel {
             return;
         }
 
-        if (mode.equals("add") || mode.equals("update")) {
-            String id = idTxtField.getText();
-            String registerDate = DateUtil.getDateToString(new Date());
-            String grade = "0";
-            String hib1 = String.valueOf(this.hib1.getSelectedItem());
-            String hib2 = String.valueOf(this.hib2.getSelectedItem());
-            String hib3 = String.valueOf(this.hib3.getSelectedItem());
-            String hib4 = String.valueOf(this.hib4.getSelectedItem());
-            String hib = hib1.concat(",").concat(hib2).concat(",").concat(hib3).concat(",").concat(hib4);
+        String id = idTxtField.getText();
+        String registerDate = DateUtil.getDateToString(new Date());
+        String grade = "0";
+        String hib1 = String.valueOf(this.hib1.getSelectedItem());
+        String hib2 = String.valueOf(this.hib2.getSelectedItem());
+        String hib3 = String.valueOf(this.hib3.getSelectedItem());
+        String hib4 = String.valueOf(this.hib4.getSelectedItem());
+        String hib = hib1.concat(",").concat(hib2).concat(",").concat(hib3).concat(",").concat(hib4);
 
-            String dtap1 = String.valueOf(this.dtap1.getSelectedItem());
-            String dtap2 = String.valueOf(this.dtap2.getSelectedItem());
-            String dtap3 = String.valueOf(this.dtap3.getSelectedItem());
-            String dtap4 = String.valueOf(this.dtap4.getSelectedItem());
-            String dtap5 = String.valueOf(this.dtap5.getSelectedItem());
-            String dtap = dtap1.concat(",").concat(dtap2).concat(",").concat(dtap3).concat(",").concat(dtap4).concat(",").concat(dtap5);
+        String dtap1 = String.valueOf(this.dtap1.getSelectedItem());
+        String dtap2 = String.valueOf(this.dtap2.getSelectedItem());
+        String dtap3 = String.valueOf(this.dtap3.getSelectedItem());
+        String dtap4 = String.valueOf(this.dtap4.getSelectedItem());
+        String dtap5 = String.valueOf(this.dtap5.getSelectedItem());
+        String dtap = dtap1.concat(",").concat(dtap2).concat(",").concat(dtap3).concat(",").concat(dtap4).concat(",").concat(dtap5);
 
-            String polio1 = String.valueOf(this.polio1.getSelectedItem());
-            String polio2 = String.valueOf(this.polio2.getSelectedItem());
-            String polio3 = String.valueOf(this.polio3.getSelectedItem());
-            String polio4 = String.valueOf(this.polio4.getSelectedItem());
-            String polio = polio1.concat(",").concat(polio2).concat(",").concat(polio3).concat(",").concat(polio4);
+        String polio1 = String.valueOf(this.polio1.getSelectedItem());
+        String polio2 = String.valueOf(this.polio2.getSelectedItem());
+        String polio3 = String.valueOf(this.polio3.getSelectedItem());
+        String polio4 = String.valueOf(this.polio4.getSelectedItem());
+        String polio = polio1.concat(",").concat(polio2).concat(",").concat(polio3).concat(",").concat(polio4);
 
-            String hepatitisb1 = String.valueOf(this.hepatitisb1.getSelectedItem());
-            String hepatitisb2 = String.valueOf(this.hepatitisb2.getSelectedItem());
-            String hepatitisb3 = String.valueOf(this.hepatitisb3.getSelectedItem());
-            String hepatitisb = hepatitisb1.concat(",").concat(hepatitisb2).concat(",").concat(hepatitisb3);
+        String hepatitisb1 = String.valueOf(this.hepatitisb1.getSelectedItem());
+        String hepatitisb2 = String.valueOf(this.hepatitisb2.getSelectedItem());
+        String hepatitisb3 = String.valueOf(this.hepatitisb3.getSelectedItem());
+        String hepatitisb = hepatitisb1.concat(",").concat(hepatitisb2).concat(",").concat(hepatitisb3);
 
-            String mmr1 = String.valueOf(this.mmr1.getSelectedItem());
-            String mmr2 = String.valueOf(this.mmr2.getSelectedItem());
-            String mmr = mmr1.concat(",").concat(mmr2);
+        String mmr1 = String.valueOf(this.mmr1.getSelectedItem());
+        String mmr2 = String.valueOf(this.mmr2.getSelectedItem());
+        String mmr = mmr1.concat(",").concat(mmr2);
 
-            String varicella1 = String.valueOf(this.varicella1.getSelectedItem());
-            String varicella2 = String.valueOf(this.varicella2.getSelectedItem());
-            String varicella = varicella1.concat(",").concat(varicella2);
+        String varicella1 = String.valueOf(this.varicella1.getSelectedItem());
+        String varicella2 = String.valueOf(this.varicella2.getSelectedItem());
+        String varicella = varicella1.concat(",").concat(varicella2);
 
-            if (mode.equals("add")) {
-                DbManagement.saveToStudentDB(id, name, ageTxtField.getText(), fName, mName, address, phoneNo, grade, hib, dtap, polio, hepatitisb, mmr, varicella, registerDate, bday);
-                AbstractPerson student = new StudentFactory().getObjectFromUI(Integer.parseInt(idTxtField.getText()), name, age, fName, mName, address, phoneNo, Double.parseDouble(grade), registerDate, bday, hib, dtap, polio, hepatitisb, mmr, varicella);
-                personDirectory.getStudentDirectory().add((Student) student);
-            } else if (mode.equals("update")) {
-                DbManagement.updateToStudentDB(name, ageTxtField.getText(), fName, mName, address, phoneNo, hib, dtap, polio, hepatitisb, mmr, varicella, bday, idTxtField.getText());
-                updateStudentInDirectory(name, age, fName, mName, address, phoneNo, bday, hib, dtap, polio, hepatitisb, mmr, varicella);
-            }
+        if (mode.equals("add")) {
+            DbManagement.saveToStudentDB(id, name, ageTxtField.getText(), fName, mName, address, phoneNo, grade, hib, dtap, polio, hepatitisb, mmr, varicella, registerDate, bday);
+            AbstractPerson student = new StudentFactory().getObjectFromUI(Integer.parseInt(idTxtField.getText()), name, age, fName, mName, address, phoneNo, Double.parseDouble(grade), registerDate, bday, hib, dtap, polio, hepatitisb, mmr, varicella);
+            personDirectory.getStudentDirectory().add((Student) student);
+        } else if (mode.equals("update")) {
+            DbManagement.updateToStudentDB(name, ageTxtField.getText(), fName, mName, address, phoneNo, hib, dtap, polio, hepatitisb, mmr, varicella, bday, idTxtField.getText());
+            updateStudentInDirectory(name, age, fName, mName, address, phoneNo, bday, hib, dtap, polio, hepatitisb, mmr, varicella);
         }
     }//GEN-LAST:event_confirmBtnActionPerformed
 
@@ -808,8 +806,6 @@ public class AddStudent extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressTxtField;
     private javax.swing.JTextField ageTxtField;
-    private javax.swing.JButton backBtn;
-    private javax.swing.JButton backBtn1;
     private javax.swing.JButton backBtn2;
     private javax.swing.JTextField birthDateTxtField;
     private javax.swing.JButton confirmBtn;

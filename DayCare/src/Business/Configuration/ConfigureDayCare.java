@@ -60,9 +60,9 @@ public class ConfigureDayCare {
             String studentData = "select * from studentdata";
             studentResultSet = statement.executeQuery(studentData);
             createStudentObjects(studentResultSet);
-//            String teacherData = "select * from TeacherData";
-//            teacherResultSet = statement.executeQuery(teacherData);
-//            createTeacherObjects(teacherResultSet);
+            String teacherData = "select * from teacherdata";
+            teacherResultSet = statement.executeQuery(teacherData);
+            createTeacherObjects(teacherResultSet);
 
         } catch (SQLException ex) {
             ex.printStackTrace();

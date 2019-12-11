@@ -7,8 +7,10 @@ package UI.MainJFrame;
 
 import Business.Directories.PersonDirectory;
 import Business.Entities.Student;
+import Business.Entities.Teacher;
 import Business.Util.DbManagement;
-import UI.AddUsers.AddStudent;
+import UI.ManageUsers.ManageStudents;
+import UI.ManageUsers.ManageTeachers;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,6 +33,7 @@ public class HomePage extends javax.swing.JPanel {
         this.displayPanel = displayPanel;
         this.personDirectory = PersonDirectory.getObject();
         populateStudentTable();
+        populateTeacherTable();
         modifyButtons();
         showButtons(true);
     }
@@ -56,6 +59,8 @@ public class HomePage extends javax.swing.JPanel {
         tchrView = new javax.swing.JButton();
         tchrUpdate = new javax.swing.JButton();
         tchrDelete = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -68,7 +73,7 @@ public class HomePage extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -91,7 +96,7 @@ public class HomePage extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -134,12 +139,38 @@ public class HomePage extends javax.swing.JPanel {
         });
 
         tchrAdd.setText("Add");
+        tchrAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tchrAddActionPerformed(evt);
+            }
+        });
 
         tchrView.setText("View");
+        tchrView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tchrViewActionPerformed(evt);
+            }
+        });
 
         tchrUpdate.setText("Update");
+        tchrUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tchrUpdateActionPerformed(evt);
+            }
+        });
 
         tchrDelete.setText("Delete");
+        tchrDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tchrDeleteActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Faculty List:");
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Children List:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -147,31 +178,40 @@ public class HomePage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(stuAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(stuView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(stuUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(stuDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tchrAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tchrView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tchrUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tchrDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(240, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane1)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)))
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tchrAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tchrView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tchrUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tchrDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(stuAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(stuView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(stuUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(stuDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(110, 110, 110)
@@ -182,7 +222,7 @@ public class HomePage extends javax.swing.JPanel {
                         .addComponent(stuUpdate)
                         .addGap(18, 18, 18)
                         .addComponent(stuDelete)
-                        .addGap(97, 97, 97)
+                        .addGap(180, 180, 180)
                         .addComponent(tchrAdd)
                         .addGap(18, 18, 18)
                         .addComponent(tchrView)
@@ -190,12 +230,12 @@ public class HomePage extends javax.swing.JPanel {
                         .addComponent(tchrUpdate)
                         .addGap(18, 18, 18)
                         .addComponent(tchrDelete)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void stuAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuAddActionPerformed
-        AddStudent addStudent = new AddStudent(displayPanel, "add", null);
+        ManageStudents addStudent = new ManageStudents(displayPanel, "add", null);
         displayPanel.add("addStudent", addStudent);
         CardLayout layout = (CardLayout) displayPanel.getLayout();
         layout.next(displayPanel);
@@ -205,7 +245,7 @@ public class HomePage extends javax.swing.JPanel {
         int selectedRow = stuTbl.getSelectedRow();
         if (selectedRow >= 0) {
             Student student = (Student) stuTbl.getValueAt(selectedRow, 1);
-            AddStudent viewStudent = new AddStudent(displayPanel, "view", student);
+            ManageStudents viewStudent = new ManageStudents(displayPanel, "view", student);
             displayPanel.add("viewStudent", viewStudent);
             CardLayout layout = (CardLayout) displayPanel.getLayout();
             layout.next(displayPanel);
@@ -218,7 +258,7 @@ public class HomePage extends javax.swing.JPanel {
         int selectedRow = stuTbl.getSelectedRow();
         if (selectedRow >= 0) {
             Student student = (Student) stuTbl.getValueAt(selectedRow, 1);
-            AddStudent updateStudent = new AddStudent(displayPanel, "update", student);
+            ManageStudents updateStudent = new ManageStudents(displayPanel, "update", student);
             displayPanel.add("updateStudent", updateStudent);
             CardLayout layout = (CardLayout) displayPanel.getLayout();
             layout.next(displayPanel);
@@ -241,6 +281,53 @@ public class HomePage extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_stuDeleteActionPerformed
 
+    private void tchrAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tchrAddActionPerformed
+        ManageTeachers addTeacher = new ManageTeachers(displayPanel, "add", null);
+        displayPanel.add("addTeacher", addTeacher);
+        CardLayout layout = (CardLayout) displayPanel.getLayout();
+        layout.next(displayPanel);
+    }//GEN-LAST:event_tchrAddActionPerformed
+
+    private void tchrViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tchrViewActionPerformed
+        int selectedRow = tchrTbl.getSelectedRow();
+        if (selectedRow >= 0) {
+            Teacher teacher = (Teacher) tchrTbl.getValueAt(selectedRow, 1);
+            ManageTeachers viewTeacher = new ManageTeachers(displayPanel, "view", teacher);
+            displayPanel.add("viewTeacher", viewTeacher);
+            CardLayout layout = (CardLayout) displayPanel.getLayout();
+            layout.next(displayPanel);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to view", "No selection found", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_tchrViewActionPerformed
+
+    private void tchrUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tchrUpdateActionPerformed
+        int selectedRow = tchrTbl.getSelectedRow();
+        if (selectedRow >= 0) {
+            Teacher teacher = (Teacher) tchrTbl.getValueAt(selectedRow, 1);
+            ManageTeachers updateTeacher = new ManageTeachers(displayPanel, "update", teacher);
+            displayPanel.add("updateTeacher", updateTeacher);
+            CardLayout layout = (CardLayout) displayPanel.getLayout();
+            layout.next(displayPanel);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to update", "No selection found", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_tchrUpdateActionPerformed
+
+    private void tchrDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tchrDeleteActionPerformed
+        int selectedRow = tchrTbl.getSelectedRow();
+        if (selectedRow >= 0) {
+            int id = (Integer) tchrTbl.getValueAt(selectedRow, 0);
+            DbManagement.deleteFromTeacherDB(String.valueOf(id));
+            if (personDirectory.getTeacherDirectory().contains(tchrTbl.getValueAt(selectedRow, 1))) {
+                personDirectory.getTeacherDirectory().remove(tchrTbl.getValueAt(selectedRow, 1));
+            }
+            populateTeacherTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete", "No selection found", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_tchrDeleteActionPerformed
+
     public void populateStudentTable() {
         DefaultTableModel dtm = (DefaultTableModel) stuTbl.getModel();
 
@@ -250,6 +337,20 @@ public class HomePage extends javax.swing.JPanel {
             row[0] = s.getId();
             row[1] = s;
             row[2] = s.getAge();
+
+            dtm.addRow(row);
+        }
+    }
+
+    public void populateTeacherTable() {
+        DefaultTableModel dtm = (DefaultTableModel) tchrTbl.getModel();
+
+        dtm.setRowCount(0);
+        for (Teacher t : personDirectory.getTeacherDirectory()) {
+            Object[] row = new Object[3];
+            row[0] = t.getId();
+            row[1] = t;
+            row[2] = t.getAge();
 
             dtm.addRow(row);
         }
@@ -283,6 +384,8 @@ public class HomePage extends javax.swing.JPanel {
         MainJFrame.signOutBtn.setVisible(bool);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton stuAdd;

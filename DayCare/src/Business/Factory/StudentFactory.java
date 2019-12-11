@@ -18,11 +18,10 @@ import java.util.List;
  */
 public class StudentFactory extends AbstractPersonFactory {
 
-    private static Student student;
+    private static Student student = null;
     private String[] fields = new String[5];
 
     public AbstractPerson getObjectFromUI(int id, String name, int age, String fName, String mName, String address, String phoneNo, double grade, String date, String bday, String hib, String dtap, String polio, String hepb, String mmr, String varicella) {
-        Student student = null;
         student = new Student(id, name, age, fName, mName, address, phoneNo, grade, date, bday);
         String fields[] = hib.split(",");
         List<Integer> list = new ArrayList<>();

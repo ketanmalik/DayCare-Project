@@ -56,9 +56,7 @@ public class DbManagement {
             pst.setString(15, registedate);
             pst.setString(16, birthdate);
 
-// id_text,user_text,pass_text,age_text,email_text > jtextfields name
             pst.execute();
-
             JOptionPane.showMessageDialog(null, "Student added to daycare", "Success", JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -103,6 +101,61 @@ public class DbManagement {
             int rowsDeleted = pst.executeUpdate();
             if (rowsDeleted > 0) {
                 JOptionPane.showMessageDialog(null, "Student deleted from daycare", "Success", JOptionPane.PLAIN_MESSAGE);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public static void saveToTeacherDB(String id, String name, String age, String wage, String category, String dateOfJoining) {
+        connect = connDB();
+        try {
+            String sql = "insert into teacherdata (id,name,age,wage,category,dateofjoining) values (?,?,?,?,?,?)";
+
+            pst = connect.prepareStatement(sql);
+            pst.setString(1, id);
+            pst.setString(2, name);
+            pst.setString(3, age);
+            pst.setString(4, wage);
+            pst.setString(5, category);
+            pst.setString(6, dateOfJoining);
+
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Teacher added to daycare", "Success", JOptionPane.PLAIN_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public static void updateToTeacherDB(String name, String age, String wage, String category, String dateOfJoining, String id) {
+        connect = connDB();
+        try {
+            String sql = "UPDATE teacherdata SET name=?, age=?, wage=?, category=?, dateofjoining=? where id=" + id;
+
+            pst = connect.prepareStatement(sql);
+
+            pst.setString(1, name);
+            pst.setString(2, age);
+            pst.setString(3, wage);
+            pst.setString(4, category);
+            pst.setString(5, dateOfJoining);
+
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Teacher information updated", "Success", JOptionPane.PLAIN_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public static void deleteFromTeacherDB(String id) {
+        connect = connDB();
+        try {
+            String sql = "DELETE from teacherdata where id=" + id;
+
+            pst = connect.prepareStatement(sql);
+            int rowsDeleted = pst.executeUpdate();
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(null, "Teacher deleted from daycare", "Success", JOptionPane.PLAIN_MESSAGE);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
