@@ -5,8 +5,11 @@
  */
 package Business.Entities;
 
-import java.util.Map;
+import Business.Util.DateUtil;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -19,9 +22,12 @@ public class Student extends AbstractPerson {
     private String address;
     private String phone;
     private double grade;
-    private Map<String, String> vaccinationRecord;
+    private Map<String, List<Integer>> vaccinationHistory;
+    private Date date;
+    private Date birthDate;
 
-    public Student(String name, int age, String fathersName, String mothersName, String address, String phone, double grade) {
+    public Student(int id, String name, int age, String fathersName, String mothersName, String address, String phone, double grade, String date, String birthDate) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.fathersName = fathersName;
@@ -29,7 +35,9 @@ public class Student extends AbstractPerson {
         this.address = address;
         this.phone = phone;
         this.grade = grade;
-        vaccinationRecord = new HashMap<>();
+        this.date = DateUtil.getStringToDate(date);
+        this.birthDate = DateUtil.getStringToDate(birthDate);
+        vaccinationHistory = new HashMap<>();
     }
 
     public String getFathersName() {
@@ -72,12 +80,28 @@ public class Student extends AbstractPerson {
         this.grade = grade;
     }
 
-    public Map<String, String> getVaccinationRecord() {
-        return vaccinationRecord;
+    public Map<String, List<Integer>> getVaccinationHistory() {
+        return vaccinationHistory;
     }
 
-    public void setVaccinationRecord(Map<String, String> vaccinationRecord) {
-        this.vaccinationRecord = vaccinationRecord;
+    public void setVaccinationHistory(Map<String, List<Integer>> vaccinationHistory) {
+        this.vaccinationHistory = vaccinationHistory;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     @Override
@@ -103,5 +127,15 @@ public class Student extends AbstractPerson {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId() {
+        this.id = id;
     }
 }

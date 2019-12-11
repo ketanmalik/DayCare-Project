@@ -16,20 +16,27 @@ import java.sql.SQLException;
  */
 public class TeacherFactory extends AbstractPersonFactory {
 
+    private static AbstractPerson teacher = null;
+
+    public AbstractPerson getObjectFromUI(int id, String name, int age, double wage, String category, String dateOfJoining) {
+        AbstractPerson teacher = new Teacher(id, name, age, wage, category, dateOfJoining);
+        return teacher;
+    }
+
     @Override
-    public AbstractPerson getObject(ResultSet csvData) {
+    public AbstractPerson getObjectFromDB(ResultSet csvData) {
         try {
+            int id = csvData.getInt("id");
             String name = csvData.getString("name");
             int age = csvData.getInt("age");
-            double credits = csvData.getDouble("credits");
+            double wage = csvData.getDouble("wage");
             String category = csvData.getString("category");
-            AbstractPerson teacher = new Teacher(name, age, credits, category);
-            return teacher;
-
+            String dateOfJoining = csvData.getString("dateofjoining");
+            teacher = new Teacher(id, name, age, wage, category, dateOfJoining);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
-        return null;
+        return teacher;
     }
 }

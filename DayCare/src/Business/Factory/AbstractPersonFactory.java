@@ -14,6 +14,6 @@ import java.sql.ResultSet;
  */
 public abstract class AbstractPersonFactory {
     
-    public abstract AbstractPerson getObject(ResultSet csvData);
+    public abstract AbstractPerson getObjectFromDB(ResultSet csvData);
     
 }
