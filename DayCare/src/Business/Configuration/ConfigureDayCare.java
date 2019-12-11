@@ -39,6 +39,7 @@ public class ConfigureDayCare {
         personDirectory = PersonDirectory.getObject();
         teacherStudentGroup = TeacherStudentDirectory.getObject();
         runConfiguration();
+        System.out.println("Business.Configuration.ConfigureDayCare.<init>()");
     }
 
     public final void runConfiguration() {
@@ -169,7 +170,7 @@ public class ConfigureDayCare {
                 .collect(Collectors.toList());
 
         for (Teacher t : personDirectory.getTeacherDirectory()) {
-            if (t.getCategory().equalsIgnoreCase("60")) {
+            if (t.getCategory().equalsIgnoreCase("60 above")) {
                 Map<Teacher, List<Student>> tempMap = new HashMap<>();
                 tempMap.put(t, tempList);
                 teacherStudentGroup.getTeacherStudentGroup().add(tempMap);

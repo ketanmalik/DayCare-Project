@@ -7,9 +7,7 @@ package UI.ManageUsers;
 
 import Business.Directories.PersonDirectory;
 import Business.Entities.AbstractPerson;
-import Business.Entities.Student;
 import Business.Entities.Teacher;
-import Business.Factory.StudentFactory;
 import Business.Factory.TeacherFactory;
 import Business.Util.DateUtil;
 import Business.Util.DbManagement;
