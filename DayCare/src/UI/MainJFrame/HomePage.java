@@ -10,9 +10,15 @@ import Business.Directories.TeacherStudentDirectory;
 import Business.Entities.Student;
 import Business.Entities.Teacher;
 import Business.Util.DbManagement;
+import static UI.MainJFrame.MainJFrame.alertsBtn;
+import static UI.MainJFrame.MainJFrame.classroomBtn;
+import static UI.MainJFrame.MainJFrame.homeBtn;
+import static UI.MainJFrame.MainJFrame.immunizationBtn;
+import static UI.MainJFrame.MainJFrame.signOutBtn;
 import UI.ManageUsers.ManageStudents;
 import UI.ManageUsers.ManageTeachers;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -37,6 +43,7 @@ public class HomePage extends javax.swing.JPanel {
         populateTeacherTable();
         modifyButtons();
         showButtons(true);
+        MainJFrame.page = "home";
     }
 
     /**
@@ -358,31 +365,37 @@ public class HomePage extends javax.swing.JPanel {
     }
 
     private void modifyButtons() {
-//        MainJFrame.manageNetworkBtn.setText("Manage Network");
-//        MainJFrame.manageNetworkBtn.setOpaque(false);
-//        MainJFrame.manageNetworkBtn.setContentAreaFilled(false);
-//        MainJFrame.manageNetworkBtn.setBorderPainted(false);
-//        MainJFrame.manageNetworkBtn.setForeground(Color.black);
-//
-//        MainJFrame.manageEnterpriseBtn.setText("Manage Enterprise");
-//        MainJFrame.manageEnterpriseBtn.setOpaque(false);
-//        MainJFrame.manageEnterpriseBtn.setContentAreaFilled(false);
-//        MainJFrame.manageEnterpriseBtn.setBorderPainted(false);
-//        MainJFrame.manageEnterpriseBtn.setForeground(Color.white);
-//
-//        MainJFrame.manageAdminBtn.setText("Manage Enterprise Admin");
-//        MainJFrame.manageAdminBtn.setOpaque(false);
-//        MainJFrame.manageAdminBtn.setContentAreaFilled(false);
-//        MainJFrame.manageAdminBtn.setBorderPainted(false);
-//        MainJFrame.manageAdminBtn.setForeground(Color.white);
+        homeBtn.setOpaque(false);
+        homeBtn.setContentAreaFilled(false);
+        homeBtn.setBorderPainted(false);
+        homeBtn.setForeground(Color.black);
 
-        MainJFrame.signOutBtn.setOpaque(false);
-        MainJFrame.signOutBtn.setContentAreaFilled(false);
-        MainJFrame.signOutBtn.setBorderPainted(false);
+        classroomBtn.setOpaque(false);
+        classroomBtn.setContentAreaFilled(false);
+        classroomBtn.setBorderPainted(false);
+        classroomBtn.setForeground(Color.white);
+
+        alertsBtn.setOpaque(false);
+        alertsBtn.setContentAreaFilled(false);
+        alertsBtn.setBorderPainted(false);
+        alertsBtn.setForeground(Color.white);
+
+        immunizationBtn.setOpaque(false);
+        immunizationBtn.setContentAreaFilled(false);
+        immunizationBtn.setBorderPainted(false);
+        immunizationBtn.setForeground(Color.white);
+
+        signOutBtn.setOpaque(false);
+        signOutBtn.setContentAreaFilled(false);
+        signOutBtn.setBorderPainted(false);
     }
 
     public void showButtons(boolean bool) {
-        MainJFrame.signOutBtn.setVisible(bool);
+        homeBtn.setVisible(bool);
+        classroomBtn.setVisible(bool);
+        alertsBtn.setVisible(bool);
+        immunizationBtn.setVisible(bool);
+        signOutBtn.setVisible(bool);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

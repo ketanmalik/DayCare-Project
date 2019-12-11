@@ -20,6 +20,8 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    public static String page;
+
     public MainJFrame() {
         initComponents();
         showButtons(false);
@@ -28,6 +30,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     public void showButtons(boolean bool) {
+        homeBtn.setVisible(bool);
+        classroomBtn.setVisible(bool);
+        alertsBtn.setVisible(bool);
+        immunizationBtn.setVisible(bool);
         signOutBtn.setVisible(bool);
     }
 
@@ -62,6 +68,10 @@ public class MainJFrame extends javax.swing.JFrame {
         controlPanel = new javax.swing.JPanel();
         signOutBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        homeBtn = new javax.swing.JButton();
+        classroomBtn = new javax.swing.JButton();
+        alertsBtn = new javax.swing.JButton();
+        immunizationBtn = new javax.swing.JButton();
         displayPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,6 +104,86 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Boston Day Care");
 
+        homeBtn.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        homeBtn.setForeground(new java.awt.Color(255, 255, 255));
+        homeBtn.setText("Home");
+        homeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                homeBtnMousePressed(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                homeBtnMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                homeBtnMouseEntered(evt);
+            }
+        });
+        homeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeBtnActionPerformed(evt);
+            }
+        });
+
+        classroomBtn.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        classroomBtn.setForeground(new java.awt.Color(255, 255, 255));
+        classroomBtn.setText("Classrooms");
+        classroomBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                classroomBtnMousePressed(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                classroomBtnMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                classroomBtnMouseEntered(evt);
+            }
+        });
+        classroomBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                classroomBtnActionPerformed(evt);
+            }
+        });
+
+        alertsBtn.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        alertsBtn.setForeground(new java.awt.Color(255, 255, 255));
+        alertsBtn.setText("Alerts");
+        alertsBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                alertsBtnMousePressed(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                alertsBtnMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                alertsBtnMouseEntered(evt);
+            }
+        });
+        alertsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alertsBtnActionPerformed(evt);
+            }
+        });
+
+        immunizationBtn.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        immunizationBtn.setForeground(new java.awt.Color(255, 255, 255));
+        immunizationBtn.setText("Immunization Records");
+        immunizationBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                immunizationBtnMousePressed(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                immunizationBtnMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                immunizationBtnMouseEntered(evt);
+            }
+        });
+        immunizationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                immunizationBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
@@ -101,16 +191,29 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 793, Short.MAX_VALUE)
+                .addGap(245, 245, 245)
+                .addComponent(homeBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(classroomBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(alertsBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(immunizationBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(signOutBtn)
-                .addContainerGap())
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
                 .addContainerGap(51, Short.MAX_VALUE)
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(signOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(signOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(classroomBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(alertsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(immunizationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -142,7 +245,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_signOutBtnActionPerformed
 
     private void signOutBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signOutBtnMouseEntered
-        MainJFrame.signOutBtn.setForeground(Color.black);
+        signOutBtn.setForeground(Color.black);
     }//GEN-LAST:event_signOutBtnMouseEntered
 
     private void signOutBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signOutBtnMousePressed
@@ -150,8 +253,80 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_signOutBtnMousePressed
 
     private void signOutBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signOutBtnMouseExited
-        MainJFrame.signOutBtn.setForeground(Color.white);
+        signOutBtn.setForeground(Color.white);
     }//GEN-LAST:event_signOutBtnMouseExited
+
+    private void homeBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_homeBtnMousePressed
+
+    private void homeBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseExited
+        if (!(page.equals("home"))) {
+            homeBtn.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_homeBtnMouseExited
+
+    private void homeBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseEntered
+        homeBtn.setForeground(Color.black);
+    }//GEN-LAST:event_homeBtnMouseEntered
+
+    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_homeBtnActionPerformed
+
+    private void classroomBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classroomBtnMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_classroomBtnMousePressed
+
+    private void classroomBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classroomBtnMouseExited
+        if (!(page.equals("classroom"))) {
+            classroomBtn.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_classroomBtnMouseExited
+
+    private void classroomBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classroomBtnMouseEntered
+        classroomBtn.setForeground(Color.black);
+    }//GEN-LAST:event_classroomBtnMouseEntered
+
+    private void classroomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classroomBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_classroomBtnActionPerformed
+
+    private void alertsBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alertsBtnMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alertsBtnMousePressed
+
+    private void alertsBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alertsBtnMouseExited
+        if (!(page.equals("alerts"))) {
+            alertsBtn.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_alertsBtnMouseExited
+
+    private void alertsBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alertsBtnMouseEntered
+        alertsBtn.setForeground(Color.black);
+    }//GEN-LAST:event_alertsBtnMouseEntered
+
+    private void alertsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alertsBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alertsBtnActionPerformed
+
+    private void immunizationBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_immunizationBtnMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_immunizationBtnMousePressed
+
+    private void immunizationBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_immunizationBtnMouseExited
+        if (!(page.equals("immunization"))) {
+            immunizationBtn.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_immunizationBtnMouseExited
+
+    private void immunizationBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_immunizationBtnMouseEntered
+        immunizationBtn.setForeground(Color.black);
+    }//GEN-LAST:event_immunizationBtnMouseEntered
+
+    private void immunizationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_immunizationBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,8 +364,12 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton alertsBtn;
+    public static javax.swing.JButton classroomBtn;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JPanel displayPanel;
+    public static javax.swing.JButton homeBtn;
+    public static javax.swing.JButton immunizationBtn;
     private javax.swing.JLabel jLabel1;
     public static javax.swing.JButton signOutBtn;
     private javax.swing.JSplitPane splitPane;

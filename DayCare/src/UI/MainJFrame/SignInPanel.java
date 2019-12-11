@@ -5,6 +5,11 @@
  */
 package UI.MainJFrame;
 
+import static UI.MainJFrame.MainJFrame.alertsBtn;
+import static UI.MainJFrame.MainJFrame.classroomBtn;
+import static UI.MainJFrame.MainJFrame.homeBtn;
+import static UI.MainJFrame.MainJFrame.immunizationBtn;
+import static UI.MainJFrame.MainJFrame.signOutBtn;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -113,7 +118,11 @@ public class SignInPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void showButtons(boolean bool) {
-        MainJFrame.signOutBtn.setVisible(bool);
+        homeBtn.setVisible(bool);
+        classroomBtn.setVisible(bool);
+        alertsBtn.setVisible(bool);
+        immunizationBtn.setVisible(bool);
+        signOutBtn.setVisible(bool);
     }
     private void usernameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTxtFieldActionPerformed
         // TODO add your handling code here:
