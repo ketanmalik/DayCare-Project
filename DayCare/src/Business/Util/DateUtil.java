@@ -69,7 +69,11 @@ public class DateUtil {
             }
         } else {
             if (todaysMonth > month) {
-                overdue = true;
+                if (todaysMonth - month > 6) {
+                    overdue = false;
+                } else {
+                    overdue = true;
+                }
             } else {
                 overdue = false;
             }
@@ -88,14 +92,56 @@ public class DateUtil {
         int todaysDay = today.getDayOfMonth();
 
         if (todaysMonth == month) {
-            diff = todaysDay - day;
+            if (todaysDay > day) {
+                diff = todaysDay - day;
+            } else {
+                diff = day - todaysDay;
+            }
+        } else {
+            diff = -999;
         }
+//        else {
+//            diff = todaysMonth - month;
+//            System.out.println(diff);
+//            diff += todaysDay - day;
+//            System.out.println(diff);
+//        }
         return diff;
     }
 
     public static Date plusDays(Date d, int i) {
-        System.out.println(i);
         LocalDate ld = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusDays(i);
         return java.sql.Date.valueOf(ld);
+    }
+
+    public static Date plusMonths(Date d) {
+        int addMonth = 0;
+        LocalDate ld = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int month = ld.getMonthValue();
+        int year = ld.getYear();
+
+        LocalDate today = LocalDate.now();
+        int todaysMonth = today.getMonthValue();
+        int todayYear = today.getYear();
+        if (todaysMonth > month) {
+            addMonth = 12 - (todaysMonth - month);
+        } else if (todaysMonth < month) {
+            addMonth = month - todaysMonth;
+        }
+        long l = todayYear - year + 1;
+//        ld.plusMonths(addMonth);
+        LocalDate dateToReturn = ld.plusYears(l);
+        return java.sql.Date.valueOf(dateToReturn);
+    }
+
+    public static Date plusYears(Date d) {
+        LocalDate ld = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int year = ld.getYear();
+
+        LocalDate today = LocalDate.now();
+        int todayYear = today.getYear();
+        long l = todayYear - year;
+        LocalDate dateToReturn = ld.plusYears(l);
+        return java.sql.Date.valueOf(dateToReturn);
     }
 }

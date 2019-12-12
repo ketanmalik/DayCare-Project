@@ -252,6 +252,11 @@ public class AlertsJPanel extends javax.swing.JPanel {
         jLabel3.setText("View Alerts");
 
         adminAlertsBtn.setText("Manage Administrative Alerts");
+        adminAlertsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminAlertsBtnActionPerformed(evt);
+            }
+        });
 
         immunizationAlertsBtn.setText("Manage Immunization Alerts");
         immunizationAlertsBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -313,6 +318,13 @@ public class AlertsJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) displayPanel.getLayout();
         layout.next(displayPanel);
     }//GEN-LAST:event_immunizationAlertsBtnActionPerformed
+
+    private void adminAlertsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminAlertsBtnActionPerformed
+        ManageAdminAlertsJPanel maljp = new ManageAdminAlertsJPanel(displayPanel);
+        displayPanel.add("maljp", maljp);
+        CardLayout layout = (CardLayout) displayPanel.getLayout();
+        layout.next(displayPanel);
+    }//GEN-LAST:event_adminAlertsBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
