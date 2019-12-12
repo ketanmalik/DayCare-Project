@@ -9,7 +9,6 @@ import UI.MainJFrame.MainJFrame;
 import static UI.MainJFrame.MainJFrame.alertsBtn;
 import static UI.MainJFrame.MainJFrame.classroomBtn;
 import static UI.MainJFrame.MainJFrame.homeBtn;
-import static UI.MainJFrame.MainJFrame.immunizationBtn;
 import static UI.MainJFrame.MainJFrame.signOutBtn;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -49,11 +48,6 @@ public class ImmunizationsJPanel extends javax.swing.JPanel {
         alertsBtn.setBorderPainted(false);
         alertsBtn.setForeground(Color.white);
 
-        immunizationBtn.setOpaque(false);
-        immunizationBtn.setContentAreaFilled(false);
-        immunizationBtn.setBorderPainted(false);
-        immunizationBtn.setForeground(Color.black);
-
         signOutBtn.setOpaque(false);
         signOutBtn.setContentAreaFilled(false);
         signOutBtn.setBorderPainted(false);
@@ -63,7 +57,6 @@ public class ImmunizationsJPanel extends javax.swing.JPanel {
         homeBtn.setVisible(bool);
         classroomBtn.setVisible(bool);
         alertsBtn.setVisible(bool);
-        immunizationBtn.setVisible(bool);
         signOutBtn.setVisible(bool);
     }
 

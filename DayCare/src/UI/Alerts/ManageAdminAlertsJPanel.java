@@ -6,9 +6,11 @@
 package UI.Alerts;
 
 import Business.Directories.PersonDirectory;
+import Business.Entities.Student;
 import Business.Entities.Teacher;
 import Business.Util.DateUtil;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +32,7 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
     public ManageAdminAlertsJPanel(JPanel displayPanel) {
         personDirectory = PersonDirectory.getObject();
         initComponents();
-        populateTable("er", 7);
+        populateTable("er");
         this.displayPanel = displayPanel;
     }
 
@@ -47,11 +49,10 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
         backBtn2 = new javax.swing.JButton();
         alertsLabel = new javax.swing.JLabel();
         alertsDropdown = new javax.swing.JComboBox<>();
-        filterLabel = new javax.swing.JLabel();
-        filterDropdown = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         filterTbl = new javax.swing.JTable();
         pastDueCheckBox = new javax.swing.JCheckBox();
+        tableLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -70,14 +71,9 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
         alertsLabel.setText("Alert Type:");
 
         alertsDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee Review", "Student Registration" }));
-
-        filterLabel.setForeground(new java.awt.Color(255, 255, 255));
-        filterLabel.setText("Due In:");
-
-        filterDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Next 7 Days", "Next 15 Days", "Next 30 Days" }));
-        filterDropdown.addActionListener(new java.awt.event.ActionListener() {
+        alertsDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filterDropdownActionPerformed(evt);
+                alertsDropdownActionPerformed(evt);
             }
         });
 
@@ -112,6 +108,8 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
             }
         });
 
+        tableLabel.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,14 +128,12 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(alertsDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
-                                .addComponent(filterLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(filterDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
                                 .addComponent(pastDueCheckBox))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(259, 259, 259)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tableLabel)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(436, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -151,16 +147,16 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(alertsLabel)
                     .addComponent(alertsDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterLabel)
-                    .addComponent(filterDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pastDueCheckBox))
-                .addGap(63, 63, 63)
+                .addGap(41, 41, 41)
+                .addComponent(tableLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void populateTable(String mode, int filter) {
+    private void populateTable(String mode) {
         DefaultTableModel dtm = (DefaultTableModel) filterTbl.getModel();
         dtm.setRowCount(0);
 
@@ -171,19 +167,24 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
                 long diff = DateUtil.getDaysDifference(t.getDateOfJoining());
                 boolean isOverdue = DateUtil.isAnniversaryOverdue(t.getDateOfJoining());
                 if (pastDueCheckBox.isSelected()) {
-                    alertsDropdown.setEnabled(false);
-                    filterDropdown.setEnabled(false);
-                    if (isOverdue) {
-                        Object[] row = new Object[3];
-                        row[0] = t.getId();
-                        row[1] = t;
-                        row[2] = DateUtil.getDateToString(DateUtil.plusYears(t.getDateOfJoining()));
+                    tableLabel.setText("Past Due Alerts:");
+                    tableLabel.setForeground(Color.red);
+//                    alertsDropdown.setEnabled(false);
+                    if (diff >= 364) {
+                        if (isOverdue) {
+                            Object[] row = new Object[3];
+                            row[0] = t.getId();
+                            row[1] = t;
+                            row[2] = DateUtil.getDateToString(DateUtil.plusYears(t.getDateOfJoining()));
 
-                        dtm.addRow(row);
+                            dtm.addRow(row);
+                        }
                     }
+
                 } else {
-                    alertsDropdown.setEnabled(true);
-                    filterDropdown.setEnabled(true);
+                    tableLabel.setText("Upcoming Alerts:");
+                    tableLabel.setForeground(Color.white);
+//                    alertsDropdown.setEnabled(true);
                     if (diff >= 364) {
                         if (anniversary) {
                             Object[] row = new Object[3];
@@ -208,6 +209,54 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
                     }
                 }
             }
+        } else {
+            List<Student> studentList = personDirectory.getStudentDirectory();
+            for (Student t : studentList) {
+                boolean anniversary = DateUtil.checkAnniversary(t.getDate());
+                long diff = DateUtil.getDaysDifference(t.getDate());
+                boolean isOverdue = DateUtil.isAnniversaryOverdue(t.getDate());
+                if (pastDueCheckBox.isSelected()) {
+                    tableLabel.setText("Past Due Alerts:");
+                    tableLabel.setForeground(Color.red);
+//                    alertsDropdown.setEnabled(false);
+                    if (diff >= 364) {
+                        if (isOverdue) {
+                            Object[] row = new Object[3];
+                            row[0] = t.getId();
+                            row[1] = t;
+                            row[2] = DateUtil.getDateToString(DateUtil.plusYears(t.getDate()));
+
+                            dtm.addRow(row);
+                        }
+                    }
+                } else {
+                    tableLabel.setText("Upcoming Alerts:");
+                    tableLabel.setForeground(Color.white);
+//                    alertsDropdown.setEnabled(true);
+                    if (diff >= 364) {
+                        if (anniversary) {
+                            Object[] row = new Object[3];
+                            row[0] = t.getId();
+                            row[1] = t;
+                            row[2] = DateUtil.getDateToString(new Date());
+                            dtm.addRow(row);
+                        } else {
+                            if (!isOverdue) {
+                                Object[] row = new Object[3];
+                                row[0] = t.getId();
+                                row[1] = t;
+                                int dueIn = DateUtil.getDueDate(t.getDate(), 0);
+                                if (dueIn == -999) {
+                                    row[2] = DateUtil.getDateToString(DateUtil.plusMonths(t.getDate()));
+                                } else {
+                                    row[2] = DateUtil.getDateToString(DateUtil.plusDays(new Date(), dueIn));
+                                }
+                                dtm.addRow(row);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     private void backBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtn2ActionPerformed
@@ -221,23 +270,35 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
         layout.previous(displayPanel);
     }//GEN-LAST:event_backBtn2ActionPerformed
 
-    private void filterDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterDropdownActionPerformed
-    }//GEN-LAST:event_filterDropdownActionPerformed
-
     private void pastDueCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pastDueCheckBoxActionPerformed
-        populateTable("er", 7);
+        applyFilter();
     }//GEN-LAST:event_pastDueCheckBoxActionPerformed
 
+    private void alertsDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alertsDropdownActionPerformed
+        applyFilter();
+    }//GEN-LAST:event_alertsDropdownActionPerformed
+
+    private void applyFilter() {
+        String selection = (String) alertsDropdown.getSelectedItem();
+        String filter = "";
+        if (selection != null) {
+            if (selection.equalsIgnoreCase("employee review")) {
+                filter = "er";
+            } else {
+                filter = "sr";
+            }
+            populateTable(filter);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> alertsDropdown;
     private javax.swing.JLabel alertsLabel;
     private javax.swing.JButton backBtn2;
-    private javax.swing.JComboBox<String> filterDropdown;
-    private javax.swing.JLabel filterLabel;
     private javax.swing.JTable filterTbl;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox pastDueCheckBox;
+    private javax.swing.JLabel tableLabel;
     // End of variables declaration//GEN-END:variables
 }

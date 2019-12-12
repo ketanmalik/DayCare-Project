@@ -13,7 +13,6 @@ import UI.MainJFrame.MainJFrame;
 import static UI.MainJFrame.MainJFrame.alertsBtn;
 import static UI.MainJFrame.MainJFrame.classroomBtn;
 import static UI.MainJFrame.MainJFrame.homeBtn;
-import static UI.MainJFrame.MainJFrame.immunizationBtn;
 import static UI.MainJFrame.MainJFrame.signOutBtn;
 import UI.ManageUsers.ManageTeachers;
 import java.awt.CardLayout;
@@ -65,11 +64,6 @@ public class AlertsJPanel extends javax.swing.JPanel {
         alertsBtn.setBorderPainted(false);
         alertsBtn.setForeground(Color.black);
 
-        immunizationBtn.setOpaque(false);
-        immunizationBtn.setContentAreaFilled(false);
-        immunizationBtn.setBorderPainted(false);
-        immunizationBtn.setForeground(Color.white);
-
         signOutBtn.setOpaque(false);
         signOutBtn.setContentAreaFilled(false);
         signOutBtn.setBorderPainted(false);
@@ -79,7 +73,6 @@ public class AlertsJPanel extends javax.swing.JPanel {
         homeBtn.setVisible(bool);
         classroomBtn.setVisible(bool);
         alertsBtn.setVisible(bool);
-        immunizationBtn.setVisible(bool);
         signOutBtn.setVisible(bool);
     }
 
@@ -89,6 +82,9 @@ public class AlertsJPanel extends javax.swing.JPanel {
         List<Student> studentList = personDirectory.getStudentDirectory();
         Map<String, List<Integer>> vaccinationHistory;
         for (Student s : studentList) {
+            if(s.getId() == 2){
+                System.out.println("UI.Alerts.AlertsJPanel.populateImmunizationTable()");
+            }
             vaccinationHistory = new HashMap<>();
             vaccinationHistory = s.getVaccinationHistory();
             Set<Map.Entry<String, List<Integer>>> entrySet = vaccinationHistory.entrySet();
@@ -97,11 +93,18 @@ public class AlertsJPanel extends javax.swing.JPanel {
                 Map.Entry<String, List<Integer>> e = (Map.Entry<String, List<Integer>>) itr.next();
                 for (Integer i : e.getValue()) {
                     if (i >= s.getAge()) {
+                        int dueIn = DateUtil.getStuDueDate(s.getBirthDate());
                         Object row[] = new Object[4];
                         row[0] = s.getId();
                         row[1] = s;
                         row[2] = e.getKey();
-                        row[3] = "Upcoming";
+                        if (dueIn == 0) {
+                            row[3] = "Due Today";
+                        } else if (dueIn > 0) {
+                            row[3] = "Upcoming";
+                        } else if (dueIn < 0) {
+                            row[3] = "Past Due";
+                        }
 
                         dtm.addRow(row);
                         break;

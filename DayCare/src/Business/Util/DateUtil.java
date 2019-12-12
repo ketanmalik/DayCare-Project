@@ -38,6 +38,19 @@ public class DateUtil {
         Date today = new Date();
         long diff = (today.getTime() - d.getTime()) / (24 * 60 * 60 * 1000);
         return diff;
+//        long diff = 0;
+//        LocalDate ld = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        int year = ld.getYear();
+//
+//        LocalDate today = LocalDate.now();
+//        int todayYear = today.getYear();
+//
+//        if (todayYear == year) {
+//            diff = 0;
+//        } else {
+//            diff = 400;
+//        }
+//        return diff;
     }
 
     public static void plusYear(Date d) {
@@ -79,6 +92,39 @@ public class DateUtil {
             }
         }
         return overdue;
+    }
+
+    public static int getStuDueDate(Date d) {
+        int diff = 0;
+        LocalDate dueDate = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusMonths(1);
+        int month = dueDate.getMonthValue();
+        int day = dueDate.getDayOfMonth();
+
+        LocalDate today = LocalDate.now();
+        int todaysMonth = today.getMonthValue();
+        int todaysDay = today.getDayOfMonth();
+
+        if (todaysMonth == month) {
+            diff = day - todaysDay;
+        } else {
+            diff = -999;
+        }
+
+        return diff;
+    }
+
+    public static Date plusStuDays(Date d, int i, String mode) {
+        LocalDate dueDate = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusMonths(i);
+        if (mode.equals("addYear")) {
+            int year = dueDate.getYear();
+
+            LocalDate today = LocalDate.now();
+            int todayYear = today.getYear();
+            long l = todayYear - year;
+            LocalDate dateToReturn = dueDate.plusYears(l);
+            return java.sql.Date.valueOf(dateToReturn);
+        }
+        return java.sql.Date.valueOf(dueDate);
     }
 
     public static int getDueDate(Date d, int i) {

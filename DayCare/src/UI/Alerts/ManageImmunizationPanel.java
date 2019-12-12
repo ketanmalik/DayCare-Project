@@ -9,7 +9,9 @@ import Business.Directories.PersonDirectory;
 import Business.Entities.Student;
 import Business.Util.DateUtil;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -57,13 +59,14 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
         studentDropdown = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         filterDropdown = new javax.swing.JComboBox<>();
-        pastDueBtn = new javax.swing.JButton();
         idTxtField = new javax.swing.JTextField();
         nameTxtField = new javax.swing.JTextField();
         bdayTxtField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         filterTbl = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        tableLabel = new javax.swing.JLabel();
+        pastDueCheckBox = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -107,8 +110,6 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
             }
         });
 
-        pastDueBtn.setText("Past Due");
-
         idTxtField.setEnabled(false);
 
         nameTxtField.setEnabled(false);
@@ -139,6 +140,16 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
         }
 
         jButton1.setText("Send Reminder");
+
+        tableLabel.setText("jLabel1");
+
+        pastDueCheckBox.setForeground(new java.awt.Color(255, 255, 255));
+        pastDueCheckBox.setText("Past Due");
+        pastDueCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pastDueCheckBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -177,7 +188,8 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pastDueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(tableLabel)
+                                    .addComponent(pastDueCheckBox)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(406, 406, 406)
                         .addComponent(jButton1)))
@@ -190,14 +202,16 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(backBtn2))
-                .addGap(105, 105, 105)
+                .addGap(108, 108, 108)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(studentDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(filterDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pastDueBtn))
-                .addGap(55, 55, 55)
+                    .addComponent(pastDueCheckBox))
+                .addGap(36, 36, 36)
+                .addComponent(tableLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -244,14 +258,49 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
             for (Integer i : e.getValue()) {
                 if (i >= s.getAge()) {
                     if ((i - s.getAge() == 1)) {
-                        int dueIn = DateUtil.getDueDate(s.getBirthDate(), i);
-                        if (dueIn <= filter) {
-                            Object[] row = new Object[3];
-                            row[0] = e.getKey();
-                            row[1] = e.getValue().indexOf(i) + 1;
-                            row[2] = DateUtil.getDateToString(DateUtil.plusDays(s.getBirthDate(), dueIn));
+                        int dueIn = DateUtil.getStuDueDate(s.getBirthDate());
+                        System.out.println(s.getName() + " " + dueIn);
+                        if (pastDueCheckBox.isSelected()) {
+                            filterDropdown.setEnabled(false);
+                            tableLabel.setText("Past Due Alerts:");
+                            tableLabel.setForeground(Color.red);
+                            if (dueIn < 0) {
+                                Object row[] = new Object[3];
+                                row[0] = e.getKey();
+                                row[1] = e.getValue().indexOf(i) + 1;
+                                row[2] = DateUtil.getDateToString(DateUtil.plusStuDays(s.getBirthDate(), (i - s.getAge()), "addYear"));
 
-                            dtm.addRow(row);
+                                dtm.addRow(row);
+                            }
+                        } else {
+                            filterDropdown.setEnabled(true);
+                            tableLabel.setText("Upcoming/Due Today Alerts:");
+                            tableLabel.setForeground(Color.white);
+                            if (dueIn >= 0) {
+                                if (dueIn <= filter) {
+                                    Object[] row = new Object[3];
+                                    row[0] = e.getKey();
+                                    row[1] = e.getValue().indexOf(i) + 1;
+                                    row[2] = DateUtil.getDateToString(DateUtil.plusStuDays(s.getBirthDate(), (i - s.getAge()), "addYear"));
+
+                                    dtm.addRow(row);
+                                }
+                            }
+                        }
+                    } else {
+                        if (pastDueCheckBox.isSelected()) {
+                            filterDropdown.setEnabled(false);
+                            tableLabel.setText("Past Due Alerts:");
+                            tableLabel.setForeground(Color.red);
+                            int dueIn = DateUtil.getStuDueDate(s.getBirthDate());
+                            if (dueIn < 0) {
+                                Object row[] = new Object[3];
+                                row[0] = e.getKey();
+                                row[1] = e.getValue().indexOf(i) + 1;
+                                row[2] = DateUtil.getDateToString(DateUtil.plusStuDays(s.getBirthDate(), (i - s.getAge()), "addYear"));
+
+                                dtm.addRow(row);
+                            }
                         }
                     }
                 }
@@ -277,6 +326,10 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
     private void studentDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentDropdownActionPerformed
         applyFilter();
     }//GEN-LAST:event_studentDropdownActionPerformed
+
+    private void pastDueCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pastDueCheckBoxActionPerformed
+        applyFilter();
+    }//GEN-LAST:event_pastDueCheckBoxActionPerformed
 
     private void applyFilter() {
         String name = (String) studentDropdown.getSelectedItem();
@@ -317,7 +370,8 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameTxtField;
-    private javax.swing.JButton pastDueBtn;
+    private javax.swing.JCheckBox pastDueCheckBox;
     private javax.swing.JComboBox<String> studentDropdown;
+    private javax.swing.JLabel tableLabel;
     // End of variables declaration//GEN-END:variables
 }

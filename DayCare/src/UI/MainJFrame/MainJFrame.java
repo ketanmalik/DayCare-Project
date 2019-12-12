@@ -35,7 +35,6 @@ public class MainJFrame extends javax.swing.JFrame {
         homeBtn.setVisible(bool);
         classroomBtn.setVisible(bool);
         alertsBtn.setVisible(bool);
-        immunizationBtn.setVisible(bool);
         signOutBtn.setVisible(bool);
     }
 
@@ -73,7 +72,6 @@ public class MainJFrame extends javax.swing.JFrame {
         homeBtn = new javax.swing.JButton();
         classroomBtn = new javax.swing.JButton();
         alertsBtn = new javax.swing.JButton();
-        immunizationBtn = new javax.swing.JButton();
         displayPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -166,26 +164,6 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        immunizationBtn.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        immunizationBtn.setForeground(new java.awt.Color(255, 255, 255));
-        immunizationBtn.setText("Immunization Records");
-        immunizationBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                immunizationBtnMousePressed(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                immunizationBtnMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                immunizationBtnMouseEntered(evt);
-            }
-        });
-        immunizationBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                immunizationBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
@@ -193,14 +171,12 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(245, 245, 245)
+                .addGap(475, 475, 475)
                 .addComponent(homeBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(classroomBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(alertsBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(immunizationBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(signOutBtn)
                 .addContainerGap(15, Short.MAX_VALUE))
@@ -214,8 +190,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addComponent(signOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(classroomBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(alertsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(immunizationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(alertsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -318,27 +293,6 @@ public class MainJFrame extends javax.swing.JFrame {
         layout.next(displayPanel);
     }//GEN-LAST:event_alertsBtnActionPerformed
 
-    private void immunizationBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_immunizationBtnMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_immunizationBtnMousePressed
-
-    private void immunizationBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_immunizationBtnMouseExited
-        if (!(page.equals("immunization"))) {
-            immunizationBtn.setForeground(Color.white);
-        }
-    }//GEN-LAST:event_immunizationBtnMouseExited
-
-    private void immunizationBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_immunizationBtnMouseEntered
-        immunizationBtn.setForeground(Color.black);
-    }//GEN-LAST:event_immunizationBtnMouseEntered
-
-    private void immunizationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationBtnActionPerformed
-        ImmunizationsJPanel immunization = new ImmunizationsJPanel(displayPanel);
-        CardLayout layout = (CardLayout) displayPanel.getLayout();
-        displayPanel.add("immunization", immunization);
-        layout.next(displayPanel);
-    }//GEN-LAST:event_immunizationBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -380,7 +334,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel controlPanel;
     private javax.swing.JPanel displayPanel;
     public static javax.swing.JButton homeBtn;
-    public static javax.swing.JButton immunizationBtn;
     private javax.swing.JLabel jLabel1;
     public static javax.swing.JButton signOutBtn;
     private javax.swing.JSplitPane splitPane;
