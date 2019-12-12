@@ -6,6 +6,8 @@
 package UI.MainJFrame;
 
 import Business.Configuration.ConfigureDayCare;
+import UI.Alerts.AlertsJPanel;
+import UI.ImmunizationRecord.ImmunizationsJPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.*;
@@ -271,7 +273,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_homeBtnMouseEntered
 
     private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
-        // TODO add your handling code here:
+        HomePage homePage = new HomePage(displayPanel);
+        displayPanel.add("homePage", homePage);
+        CardLayout layout = (CardLayout) displayPanel.getLayout();
+        layout.next(displayPanel);
     }//GEN-LAST:event_homeBtnActionPerformed
 
     private void classroomBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classroomBtnMousePressed
@@ -307,7 +312,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_alertsBtnMouseEntered
 
     private void alertsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alertsBtnActionPerformed
-        // TODO add your handling code here:
+        AlertsJPanel alerts = new AlertsJPanel(displayPanel);
+        CardLayout layout = (CardLayout) displayPanel.getLayout();
+        displayPanel.add("alerts", alerts);
+        layout.next(displayPanel);
     }//GEN-LAST:event_alertsBtnActionPerformed
 
     private void immunizationBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_immunizationBtnMousePressed
@@ -325,7 +333,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_immunizationBtnMouseEntered
 
     private void immunizationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationBtnActionPerformed
-        // TODO add your handling code here:
+        ImmunizationsJPanel immunization = new ImmunizationsJPanel(displayPanel);
+        CardLayout layout = (CardLayout) displayPanel.getLayout();
+        displayPanel.add("immunization", immunization);
+        layout.next(displayPanel);
     }//GEN-LAST:event_immunizationBtnActionPerformed
 
     /**
