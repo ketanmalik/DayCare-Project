@@ -13,7 +13,6 @@ import UI.MainJFrame.MainJFrame;
 import static UI.MainJFrame.MainJFrame.alertsBtn;
 import static UI.MainJFrame.MainJFrame.classroomBtn;
 import static UI.MainJFrame.MainJFrame.homeBtn;
-import static UI.MainJFrame.MainJFrame.signOutBtn;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.HashMap;
@@ -62,17 +61,12 @@ public class AlertsJPanel extends javax.swing.JPanel {
         alertsBtn.setContentAreaFilled(false);
         alertsBtn.setBorderPainted(false);
         alertsBtn.setForeground(Color.black);
-
-        signOutBtn.setOpaque(false);
-        signOutBtn.setContentAreaFilled(false);
-        signOutBtn.setBorderPainted(false);
     }
 
     public void showButtons(boolean bool) {
         homeBtn.setVisible(bool);
         classroomBtn.setVisible(bool);
         alertsBtn.setVisible(bool);
-        signOutBtn.setVisible(bool);
     }
 
     public void populateImmunizationTable() {
@@ -253,14 +247,14 @@ public class AlertsJPanel extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("View Alerts");
 
-        adminAlertsBtn.setText("Manage Administrative Alerts");
+        adminAlertsBtn.setText("Manage ");
         adminAlertsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adminAlertsBtnActionPerformed(evt);
             }
         });
 
-        immunizationAlertsBtn.setText("Manage Immunization Alerts");
+        immunizationAlertsBtn.setText("Manage");
         immunizationAlertsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 immunizationAlertsBtnActionPerformed(evt);
@@ -276,40 +270,43 @@ public class AlertsJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(immunizationAlertsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(adminAlertsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(500, 500, 500)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(adminAlertsBtn)
-                        .addGap(387, 387, 387)
-                        .addComponent(immunizationAlertsBtn)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addGap(350, 350, 350)
+                        .addComponent(jLabel3)))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel3)
-                .addGap(90, 90, 90)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(adminAlertsBtn)
-                    .addComponent(immunizationAlertsBtn))
-                .addContainerGap(348, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(84, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(adminAlertsBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(immunizationAlertsBtn)
+                        .addGap(172, 172, 172))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
