@@ -11,7 +11,6 @@ import Business.Util.DateUtil;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -258,8 +257,7 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
             for (Integer i : e.getValue()) {
                 if (i >= s.getAge()) {
                     if ((i - s.getAge() == 1)) {
-                        int dueIn = DateUtil.getStuDueDate(s.getBirthDate());
-                        System.out.println(s.getName() + " " + dueIn);
+                        int dueIn = DateUtil.getStuDueDate(s.getBirthDate(), i);
                         if (pastDueCheckBox.isSelected()) {
                             filterDropdown.setEnabled(false);
                             tableLabel.setText("Past Due Alerts:");
@@ -292,12 +290,12 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
                             filterDropdown.setEnabled(false);
                             tableLabel.setText("Past Due Alerts:");
                             tableLabel.setForeground(Color.red);
-                            int dueIn = DateUtil.getStuDueDate(s.getBirthDate());
+                            int dueIn = DateUtil.getStuDueDate(s.getBirthDate(), i);
                             if (dueIn < 0) {
                                 Object row[] = new Object[3];
                                 row[0] = e.getKey();
                                 row[1] = e.getValue().indexOf(i) + 1;
-                                row[2] = DateUtil.getDateToString(DateUtil.plusStuDays(s.getBirthDate(), (i - s.getAge()), "addYear"));
+                                row[2] = DateUtil.getDateToString(DateUtil.futureStuDueDates(s.getBirthDate(), i));
 
                                 dtm.addRow(row);
                             }
@@ -329,6 +327,15 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
 
     private void pastDueCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pastDueCheckBoxActionPerformed
         applyFilter();
+        if (pastDueCheckBox.isSelected()) {
+            tableLabel.setText("Past Due Alerts:");
+            tableLabel.setForeground(Color.red);
+            filterDropdown.setEnabled(false);
+        } else {
+            tableLabel.setForeground(Color.white);
+            tableLabel.setText("Upcoming/Due Today Alerts:");
+            filterDropdown.setEnabled(true);
+        }
     }//GEN-LAST:event_pastDueCheckBoxActionPerformed
 
     private void applyFilter() {

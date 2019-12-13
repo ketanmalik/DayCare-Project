@@ -50,4 +50,9 @@ public class Classroom extends ClassroomFactory {
         this.classGroup = classGroup;
     }
 
+    @Override
+    public String toString() {
+        return this.id;
+    }
+
 }

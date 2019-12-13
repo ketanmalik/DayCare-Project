@@ -39,12 +39,12 @@ public class ConfigureDayCare {
         personDirectory = PersonDirectory.getObject();
         teacherStudentGroup = TeacherStudentDirectory.getObject();
         runConfiguration();
-        System.out.println("Business.Configuration.ConfigureDayCare.<init>()");
     }
 
     public final void runConfiguration() {
         initializeDatabase();
         initializeStudentTeacherGroup();
+        initializeClassroomGroup();
     }
 
     public final void initializeDatabase() {

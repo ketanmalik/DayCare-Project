@@ -14,7 +14,6 @@ import static UI.MainJFrame.MainJFrame.alertsBtn;
 import static UI.MainJFrame.MainJFrame.classroomBtn;
 import static UI.MainJFrame.MainJFrame.homeBtn;
 import static UI.MainJFrame.MainJFrame.signOutBtn;
-import UI.ManageUsers.ManageTeachers;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.HashMap;
@@ -82,8 +81,7 @@ public class AlertsJPanel extends javax.swing.JPanel {
         List<Student> studentList = personDirectory.getStudentDirectory();
         Map<String, List<Integer>> vaccinationHistory;
         for (Student s : studentList) {
-            if(s.getId() == 2){
-                System.out.println("UI.Alerts.AlertsJPanel.populateImmunizationTable()");
+            if (s.getId() == 2) {
             }
             vaccinationHistory = new HashMap<>();
             vaccinationHistory = s.getVaccinationHistory();
@@ -93,7 +91,8 @@ public class AlertsJPanel extends javax.swing.JPanel {
                 Map.Entry<String, List<Integer>> e = (Map.Entry<String, List<Integer>>) itr.next();
                 for (Integer i : e.getValue()) {
                     if (i >= s.getAge()) {
-                        int dueIn = DateUtil.getStuDueDate(s.getBirthDate());
+                        int dueIn = DateUtil.getStuDueDate(s.getBirthDate(), i);
+                        String s1 = DateUtil.getDateToString(DateUtil.futureStuDueDates(s.getBirthDate(), i));
                         Object row[] = new Object[4];
                         row[0] = s.getId();
                         row[1] = s;
@@ -285,14 +284,13 @@ public class AlertsJPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(500, 500, 500)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(adminAlertsBtn)
+                        .addGap(387, 387, 387)
+                        .addComponent(immunizationAlertsBtn)))
                 .addContainerGap(41, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(adminAlertsBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(immunizationAlertsBtn)
-                .addGap(203, 203, 203))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

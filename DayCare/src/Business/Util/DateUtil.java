@@ -6,11 +6,14 @@
 package Business.Util;
 
 import java.text.SimpleDateFormat;
+import static java.time.Instant.now;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.MonthDay;
+import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
+import static java.util.concurrent.TimeUnit.DAYS;
 
 /**
  *
@@ -94,22 +97,39 @@ public class DateUtil {
         return overdue;
     }
 
-    public static int getStuDueDate(Date d) {
-        int diff = 0;
-        LocalDate dueDate = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusMonths(1);
-        int month = dueDate.getMonthValue();
-        int day = dueDate.getDayOfMonth();
+    public static int getStuDueDate(Date d, int months) {
+//        int diff = 999;
+//        LocalDate dueDate = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusMonths(1);
+//        int month = dueDate.getMonthValue();
+//        int day = dueDate.getDayOfMonth();
+//
+//        LocalDate today = LocalDate.now();
+//        int todaysMonth = today.getMonthValue();
+//        int todaysDay = today.getDayOfMonth();
+//
+//        if (todaysMonth == month) {
+//            diff = day - todaysDay;
+//        } else {
+//            if (todaysMonth > month) {
+//                if (todaysMonth - month > 6) {
+//                    diff = 1;
+//                } else {
+//                    diff = -999;
+//                }
+//            } else {
+//                diff = 1;
+//            }
+//        }
+//
+//        return diff;
+
+        int years = months / 12;
+        int remainingMonths = months % 12;
+        LocalDate ld = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusMonths(remainingMonths).plusYears(years);
 
         LocalDate today = LocalDate.now();
-        int todaysMonth = today.getMonthValue();
-        int todaysDay = today.getDayOfMonth();
-
-        if (todaysMonth == month) {
-            diff = day - todaysDay;
-        } else {
-            diff = -999;
-        }
-
+        Period period = Period.between(today, ld);
+        int diff = period.getDays();
         return diff;
     }
 
@@ -189,5 +209,12 @@ public class DateUtil {
         long l = todayYear - year;
         LocalDate dateToReturn = ld.plusYears(l);
         return java.sql.Date.valueOf(dateToReturn);
+    }
+
+    public static Date futureStuDueDates(Date d, int months) {
+        int years = months / 12;
+        int remainingMonths = months % 12;
+        LocalDate ld = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusMonths(remainingMonths).plusYears(years);
+        return java.sql.Date.valueOf(ld);
     }
 }

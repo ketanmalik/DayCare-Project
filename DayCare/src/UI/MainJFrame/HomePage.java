@@ -6,7 +6,6 @@
 package UI.MainJFrame;
 
 import Business.Directories.PersonDirectory;
-import Business.Directories.TeacherStudentDirectory;
 import Business.Entities.Student;
 import Business.Entities.Teacher;
 import Business.Util.DbManagement;

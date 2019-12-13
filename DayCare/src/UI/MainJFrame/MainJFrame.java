@@ -7,7 +7,7 @@ package UI.MainJFrame;
 
 import Business.Configuration.ConfigureDayCare;
 import UI.Alerts.AlertsJPanel;
-import UI.ImmunizationRecord.ImmunizationsJPanel;
+import UI.Classroom.ClassroomJPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.*;
@@ -269,7 +269,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_classroomBtnMouseEntered
 
     private void classroomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classroomBtnActionPerformed
-        // TODO add your handling code here:
+        ClassroomJPanel classroom = new ClassroomJPanel(displayPanel);
+        displayPanel.add("classroom", classroom);
+        CardLayout layout = (CardLayout) displayPanel.getLayout();
+        layout.next(displayPanel);
     }//GEN-LAST:event_classroomBtnActionPerformed
 
     private void alertsBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alertsBtnMousePressed
