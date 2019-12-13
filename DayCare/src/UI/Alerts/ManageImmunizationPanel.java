@@ -8,6 +8,7 @@ package UI.Alerts;
 import Business.Directories.PersonDirectory;
 import Business.Entities.Student;
 import Business.Util.DateUtil;
+import Business.Util.SMS;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -16,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -63,7 +65,7 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
         bdayTxtField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         filterTbl = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        reminderBtn = new javax.swing.JButton();
         tableLabel = new javax.swing.JLabel();
         pastDueCheckBox = new javax.swing.JCheckBox();
 
@@ -138,7 +140,12 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
             filterTbl.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jButton1.setText("Send Reminder");
+        reminderBtn.setText("Send Reminder");
+        reminderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reminderBtnActionPerformed(evt);
+            }
+        });
 
         tableLabel.setText("jLabel1");
 
@@ -191,7 +198,7 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
                                             .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(50, 50, 50)
-                                .addComponent(jButton1)))))
+                                .addComponent(reminderBtn)))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -216,7 +223,7 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(127, 127, 127)
-                        .addComponent(jButton1)))
+                        .addComponent(reminderBtn)))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -338,6 +345,25 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_pastDueCheckBoxActionPerformed
 
+    private void reminderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reminderBtnActionPerformed
+        int selectedRow = filterTbl.getSelectedRow();
+        if (selectedRow >= 0) {
+            String name = (String) studentDropdown.getSelectedItem();
+            String vaccineName = (String) filterTbl.getValueAt(selectedRow, 0);
+            int dose = (Integer) filterTbl.getValueAt(selectedRow, 1);
+            String date = (String) filterTbl.getValueAt(selectedRow, 2);
+            String msg = "";
+            if (pastDueCheckBox.isSelected()) {
+                msg = "Dose - " + dose + " of vaccine " + vaccineName + " for " + name + " was due on " + date;
+            } else {
+                msg = "Dose - " + dose + " of vaccine " + vaccineName + " for " + name + " is due on " + date;
+            }
+            SMS.sendSMS(msg);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to send reminder", "No Selection Found", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_reminderBtnActionPerformed
+
     private void applyFilter() {
         String name = (String) studentDropdown.getSelectedItem();
         if (name != null) {
@@ -368,7 +394,6 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> filterDropdown;
     private javax.swing.JTable filterTbl;
     private javax.swing.JTextField idTxtField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -378,6 +403,7 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameTxtField;
     private javax.swing.JCheckBox pastDueCheckBox;
+    private javax.swing.JButton reminderBtn;
     private javax.swing.JComboBox<String> studentDropdown;
     private javax.swing.JLabel tableLabel;
     // End of variables declaration//GEN-END:variables

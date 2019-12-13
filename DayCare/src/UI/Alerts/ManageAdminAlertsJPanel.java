@@ -9,11 +9,13 @@ import Business.Directories.PersonDirectory;
 import Business.Entities.Student;
 import Business.Entities.Teacher;
 import Business.Util.DateUtil;
+import Business.Util.SMS;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,6 +55,7 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
         filterTbl = new javax.swing.JTable();
         pastDueCheckBox = new javax.swing.JCheckBox();
         tableLabel = new javax.swing.JLabel();
+        reminderBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -110,6 +113,13 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
 
         tableLabel.setText("jLabel1");
 
+        reminderBtn.setText("Send Reminder");
+        reminderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reminderBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,15 +136,19 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(alertsLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(alertsDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(pastDueCheckBox))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(alertsDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(pastDueCheckBox))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(50, 50, 50)
+                                        .addComponent(reminderBtn))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(141, 141, 141)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tableLabel)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(179, Short.MAX_VALUE))
+                        .addComponent(tableLabel)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +165,11 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(tableLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(reminderBtn)))
                 .addContainerGap(190, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -278,6 +296,37 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
         applyFilter();
     }//GEN-LAST:event_alertsDropdownActionPerformed
 
+    private void reminderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reminderBtnActionPerformed
+        int selectedRow = filterTbl.getSelectedRow();
+        if (selectedRow >= 0) {
+            String type = (String) alertsDropdown.getSelectedItem();
+            int id = (Integer) filterTbl.getValueAt(selectedRow, 0);
+
+            String date = (String) filterTbl.getValueAt(selectedRow, 2);
+            String msg = "";
+            if (type.equalsIgnoreCase("employee review")) {
+                Teacher t = (Teacher) filterTbl.getValueAt(selectedRow, 1);
+                String name = t.getName();
+                if (pastDueCheckBox.isSelected()) {
+                    msg = "Employee Review for employee " + name + " with ID - " + id + " was due on " + date;
+                } else {
+                    msg = "Employee Review for employee " + name + " with ID - " + id + " is due on " + date;
+                }
+            } else {
+                Student t = (Student) filterTbl.getValueAt(selectedRow, 1);
+                String name = t.getName();
+                if (pastDueCheckBox.isSelected()) {
+                    msg = "Student Registration for " + name + " with ID - " + id + " was due on " + date;
+                } else {
+                    msg = "Student Registration for " + name + " with ID - " + id + " is due on " + date;
+                }
+            }
+            SMS.sendSMS(msg);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to send reminder", "No Selection Found", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_reminderBtnActionPerformed
+
     private void applyFilter() {
         String selection = (String) alertsDropdown.getSelectedItem();
         String filter = "";
@@ -299,6 +348,7 @@ public class ManageAdminAlertsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox pastDueCheckBox;
+    private javax.swing.JButton reminderBtn;
     private javax.swing.JLabel tableLabel;
     // End of variables declaration//GEN-END:variables
 }
