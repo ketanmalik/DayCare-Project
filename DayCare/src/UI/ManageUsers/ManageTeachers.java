@@ -5,7 +5,10 @@
  */
 package UI.ManageUsers;
 
+import Business.Configuration.ConfigureDayCare;
+import Business.Directories.ClassroomDirectory;
 import Business.Directories.PersonDirectory;
+import Business.Directories.TeacherStudentDirectory;
 import Business.Entities.AbstractPerson;
 import Business.Entities.Teacher;
 import Business.Factory.TeacherFactory;
@@ -273,6 +276,12 @@ public class ManageTeachers extends javax.swing.JPanel {
 
         if (mode.equals("add")) {
             if (mode.equals("add")) {
+                TeacherStudentDirectory tsd = TeacherStudentDirectory.getObject();
+                tsd.getTeacherStudentGroup().clear();
+                ClassroomDirectory cd = ClassroomDirectory.getObject();
+                cd.getClassroomDirectory().clear();
+                ConfigureDayCare.initializeClassroomGroup();
+                ConfigureDayCare.initializeStudentTeacherGroup();
                 DbManagement.saveToTeacherDB(id, name, ageTxtField.getText(), wageTxtField.getText(), category, dateOfJoining);
                 AbstractPerson teacher = new TeacherFactory().getObjectFromUI(Integer.parseInt(idTxtField.getText()), name, age, wage, category, dateOfJoining);
                 personDirectory.getTeacherDirectory().add((Teacher) teacher);
@@ -280,6 +289,12 @@ public class ManageTeachers extends javax.swing.JPanel {
         } else if (mode.equals("update")) {
             DbManagement.updateToTeacherDB(name, ageTxtField.getText(), wageTxtField.getText(), category, dateOfJoining, String.valueOf(teacher.getId()));
             updateTeacherInDirectory(name, age, wage, category, dateOfJoining);
+            TeacherStudentDirectory tsd = TeacherStudentDirectory.getObject();
+            tsd.getTeacherStudentGroup().clear();
+            ClassroomDirectory cd = ClassroomDirectory.getObject();
+            cd.getClassroomDirectory().clear();
+            ConfigureDayCare.initializeClassroomGroup();
+            ConfigureDayCare.initializeStudentTeacherGroup();
         }
     }//GEN-LAST:event_confirmBtnActionPerformed
 

@@ -5,7 +5,10 @@
  */
 package UI.MainJFrame;
 
+import Business.Configuration.ConfigureDayCare;
+import Business.Directories.ClassroomDirectory;
 import Business.Directories.PersonDirectory;
+import Business.Directories.TeacherStudentDirectory;
 import Business.Entities.Student;
 import Business.Entities.Teacher;
 import Business.Util.DbManagement;
@@ -282,6 +285,12 @@ public class HomePage extends javax.swing.JPanel {
             if (personDirectory.getStudentDirectory().contains(stuTbl.getValueAt(selectedRow, 1))) {
                 personDirectory.getStudentDirectory().remove(stuTbl.getValueAt(selectedRow, 1));
             }
+            TeacherStudentDirectory tsd = TeacherStudentDirectory.getObject();
+            tsd.getTeacherStudentGroup().clear();
+            ClassroomDirectory cd = ClassroomDirectory.getObject();
+            cd.getClassroomDirectory().clear();
+            ConfigureDayCare.initializeClassroomGroup();
+            ConfigureDayCare.initializeStudentTeacherGroup();
             populateStudentTable();
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to delete", "No selection found", JOptionPane.ERROR_MESSAGE);
@@ -329,6 +338,12 @@ public class HomePage extends javax.swing.JPanel {
             if (personDirectory.getTeacherDirectory().contains(tchrTbl.getValueAt(selectedRow, 1))) {
                 personDirectory.getTeacherDirectory().remove(tchrTbl.getValueAt(selectedRow, 1));
             }
+            TeacherStudentDirectory tsd = TeacherStudentDirectory.getObject();
+            tsd.getTeacherStudentGroup().clear();
+            ClassroomDirectory cd = ClassroomDirectory.getObject();
+            cd.getClassroomDirectory().clear();
+            ConfigureDayCare.initializeStudentTeacherGroup();
+            ConfigureDayCare.initializeClassroomGroup();
             populateTeacherTable();
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to delete", "No selection found", JOptionPane.ERROR_MESSAGE);

@@ -234,7 +234,8 @@ public class ClassroomJPanel extends javax.swing.JPanel {
 
     private void classroomTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classroomTblMouseClicked
         int selectedRow = classroomTbl.getSelectedRow();
-        populateDetails((Classroom) classroomTbl.getValueAt(selectedRow, 0));
+        String key = (String) classroomTbl.getValueAt(selectedRow, 1);
+        populateDetails((Classroom) classroomTbl.getValueAt(selectedRow, 0), key);
     }//GEN-LAST:event_classroomTblMouseClicked
 
     public void populateTable() {
@@ -281,27 +282,30 @@ public class ClassroomJPanel extends javax.swing.JPanel {
         this.studentList.getParent().validate();
     }
 
-    public void populateDetails(Classroom c) {
+    public void populateDetails(Classroom c, String key) {
         Map<String, Map<Teacher, List<Student>>> clsGrp = new HashMap<>();
         clsGrp = c.getClassGroup();
         Set<Map.Entry<String, Map<Teacher, List<Student>>>> clsGrpEntry = clsGrp.entrySet();
         Iterator itr = clsGrpEntry.iterator();
         while (itr.hasNext()) {
             Map.Entry<String, Map<Teacher, List<Student>>> e = (Map.Entry<String, Map<Teacher, List<Student>>>) itr.next();
-            Map<Teacher, List<Student>> teacherStudent = new HashMap<>();
-            teacherStudent = e.getValue();
-            Set<Map.Entry<Teacher, List<Student>>> teacherStudentEntry = teacherStudent.entrySet();
-            Iterator itr2 = teacherStudentEntry.iterator();
-            while (itr2.hasNext()) {
-                Map.Entry<Teacher, List<Student>> e2 = (Map.Entry<Teacher, List<Student>>) itr2.next();
-                roomIdTxtField.setText(c.getId());
-                groupIdTxtField.setText(e.getKey());
-                assignedTeacherTxtField.setText(e2.getKey().getName());
-                categoryTxtField.setText(e2.getKey().getCategory());
-                totalStudentsTxtField.setText(String.valueOf(e2.getValue().size()));
-                populateList(e2.getValue());
-
+            if (e.getKey().equals(key)) {
+                Map<Teacher, List<Student>> teacherStudent = new HashMap<>();
+                teacherStudent = e.getValue();
+                Set<Map.Entry<Teacher, List<Student>>> teacherStudentEntry = teacherStudent.entrySet();
+                Iterator itr2 = teacherStudentEntry.iterator();
+                while (itr2.hasNext()) {
+                    Map.Entry<Teacher, List<Student>> e2 = (Map.Entry<Teacher, List<Student>>) itr2.next();
+                    roomIdTxtField.setText(c.getId());
+                    groupIdTxtField.setText(e.getKey());
+                    assignedTeacherTxtField.setText(e2.getKey().getName());
+                    categoryTxtField.setText(e2.getKey().getCategory());
+                    totalStudentsTxtField.setText(String.valueOf(e2.getValue().size()));
+                    populateList(e2.getValue());
+                }
+                break;
             }
+
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

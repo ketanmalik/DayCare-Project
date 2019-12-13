@@ -8,6 +8,7 @@ package UI.ManageUsers;
 import Business.Configuration.ConfigureDayCare;
 import Business.Directories.ClassroomDirectory;
 import Business.Directories.PersonDirectory;
+import Business.Directories.TeacherStudentDirectory;
 import Business.Entities.AbstractPerson;
 import Business.Entities.Student;
 import Business.Factory.StudentFactory;
@@ -741,11 +742,12 @@ public class ManageStudents extends javax.swing.JPanel {
         String varicella = varicella1.concat(",").concat(varicella2);
 
         if (mode.equals("add")) {
+
             if (age >= 6 && age <= 12) {
-                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 6 && e.getAge() <= 12).count() == 4) {
-                    JOptionPane.showMessageDialog(null, "Cannot add more students of age 6-12");
-                    return;
-                }
+//                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 6 && e.getAge() <= 12).count() == 4) {
+//                    JOptionPane.showMessageDialog(null, "Cannot add more students of age 6-12");
+//                    return;
+//                }
             } else if (age >= 13 && age <= 24) {
                 if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 13 && e.getAge() <= 24).count() == 5) {
                     JOptionPane.showMessageDialog(null, "Cannot add more students of age 13-24");
@@ -772,14 +774,24 @@ public class ManageStudents extends javax.swing.JPanel {
                     return;
                 }
             }
-//            ConfigureDayCare.initializeStudentTeacherGroup();
-//            ConfigureDayCare.initializeClassroomGroup();
             DbManagement.saveToStudentDB(id, name, ageTxtField.getText(), fName, mName, address, phoneNo, grade, hib, dtap, polio, hepatitisb, mmr, varicella, registerDate, bday);
             AbstractPerson student = new StudentFactory().getObjectFromUI(Integer.parseInt(idTxtField.getText()), name, age, fName, mName, address, phoneNo, Double.parseDouble(grade), registerDate, bday, hib, dtap, polio, hepatitisb, mmr, varicella);
             personDirectory.getStudentDirectory().add((Student) student);
+            TeacherStudentDirectory tsd = TeacherStudentDirectory.getObject();
+            tsd.getTeacherStudentGroup().clear();
+            ClassroomDirectory cd = ClassroomDirectory.getObject();
+            cd.getClassroomDirectory().clear();
+            ConfigureDayCare.initializeClassroomGroup();
+            ConfigureDayCare.initializeStudentTeacherGroup();
         } else if (mode.equals("update")) {
             DbManagement.updateToStudentDB(name, ageTxtField.getText(), fName, mName, address, phoneNo, hib, dtap, polio, hepatitisb, mmr, varicella, bday, idTxtField.getText());
             updateStudentInDirectory(name, age, fName, mName, address, phoneNo, bday, hib, dtap, polio, hepatitisb, mmr, varicella);
+            TeacherStudentDirectory tsd = TeacherStudentDirectory.getObject();
+            tsd.getTeacherStudentGroup().clear();
+            ClassroomDirectory cd = ClassroomDirectory.getObject();
+            cd.getClassroomDirectory().clear();
+            ConfigureDayCare.initializeClassroomGroup();
+            ConfigureDayCare.initializeStudentTeacherGroup();
         }
     }//GEN-LAST:event_confirmBtnActionPerformed
 
