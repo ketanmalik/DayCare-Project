@@ -44,6 +44,7 @@ public class ConfigureDayCare {
     public final void runConfiguration() {
         initializeDatabase();
         initializeStudentTeacherGroup();
+        initializeClassroomGroup();
     }
 
     public final void initializeDatabase() {
@@ -169,7 +170,7 @@ public class ConfigureDayCare {
                 .collect(Collectors.toList());
 
         for (Teacher t : personDirectory.getTeacherDirectory()) {
-            if (t.getCategory().equalsIgnoreCase("60")) {
+            if (t.getCategory().equalsIgnoreCase("60 above")) {
                 Map<Teacher, List<Student>> tempMap = new HashMap<>();
                 tempMap.put(t, tempList);
                 teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
