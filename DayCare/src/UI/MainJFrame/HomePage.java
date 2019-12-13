@@ -346,7 +346,6 @@ public class HomePage extends javax.swing.JPanel {
                 Set<Teacher> keySet = temp.keySet();
                 for (Teacher t : keySet) {
                     if (t.getId() == id) {
-                        System.out.println("Found id: " + t.getId());
                         if (temp.get(t) != null || temp.get(t).size() != 0) {
                             JOptionPane.showMessageDialog(null, "This teacher has associated students. Please remove students first", "Invalid Operation", JOptionPane.ERROR_MESSAGE);
                             return;

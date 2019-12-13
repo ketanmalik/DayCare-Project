@@ -162,7 +162,6 @@ public class ConfigureDayCare {
             c1.getClassGroup().put("1B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
 
         } else if (size >= 9 && size <= 12) {
-            System.out.println("Business.Configuration.ConfigureDayCare.initializeStudentTeacherGroup()");
             List<Student> t1 = new ArrayList<>();
             List<Student> t2 = new ArrayList<>();
             List<Student> t3 = new ArrayList<>();

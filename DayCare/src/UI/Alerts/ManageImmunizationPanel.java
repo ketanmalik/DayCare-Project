@@ -104,7 +104,7 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Due In:");
 
-        filterDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Next 7 Days", "Next 15 Days", "Next 30 Days" }));
+        filterDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Next 7 Days", "Next 15 Days", "Next 30 Days", "Next 6 Months" }));
         filterDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterDropdownActionPerformed(evt);
@@ -286,7 +286,7 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
                                     Object[] row = new Object[3];
                                     row[0] = e.getKey();
                                     row[1] = e.getValue().indexOf(i) + 1;
-                                    row[2] = DateUtil.getDateToString(DateUtil.plusStuDays(s.getBirthDate(), (i - s.getAge()), "addYear"));
+                                    row[2] = DateUtil.getDateToString(DateUtil.futureStuDueDates(s.getBirthDate(), i));
 
                                     dtm.addRow(row);
                                 }
@@ -354,9 +354,9 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
             String date = (String) filterTbl.getValueAt(selectedRow, 2);
             String msg = "";
             if (pastDueCheckBox.isSelected()) {
-                msg = "Dose - " + dose + " of vaccine " + vaccineName + " for " + name + " was due on " + date;
+                msg = "Dose - " + dose + " of " + vaccineName + " vaccine for " + name + " was due on " + date;
             } else {
-                msg = "Dose - " + dose + " of vaccine " + vaccineName + " for " + name + " is due on " + date;
+                msg = "Dose - " + dose + " of " + vaccineName + " vaccine for " + name + " is due on " + date;
             }
             SMS.sendSMS(msg);
         } else {
@@ -382,6 +382,8 @@ public class ManageImmunizationPanel extends javax.swing.JPanel {
                 filter = 15;
             } else if (f.equalsIgnoreCase("next 30 days")) {
                 filter = 30;
+            } else if (f.equals("Next 6 Months")) {
+                filter = 184;
             }
             populateTable(s, filter);
             populateFields(s);
