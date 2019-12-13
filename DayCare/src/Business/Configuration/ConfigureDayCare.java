@@ -109,13 +109,14 @@ public class ConfigureDayCare {
         int size = 0;
         int i = 0;
         String name = "";
+        String name2 = "";
 
         tempList = personDirectory.getStudentDirectory().stream()
                 .filter(e -> e.getAge() >= 6 && e.getAge() <= 12)
                 .collect(Collectors.toList());
 
         size = tempList.size();
-        if (tempList.size() <= 4) {
+        if (size <= 4) {
             for (Teacher t : personDirectory.getTeacherDirectory()) {
                 if (t.getCategory().equalsIgnoreCase("6-12")) {
                     Map<Teacher, List<Student>> tempMap = new HashMap<>();
@@ -137,8 +138,6 @@ public class ConfigureDayCare {
                     Map<Teacher, List<Student>> tempMap = new HashMap<>();
                     tempMap.put(t, t1);
                     name = t.getName();
-//                    t1.forEach(System.out::print);
-                    tempMap.get(0);
                     teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
                     break;
                 }
@@ -153,85 +152,470 @@ public class ConfigureDayCare {
                     if (t.getName().equals(name)) {
                         continue;
                     }
+                    name2 = t.getName();
                     Map<Teacher, List<Student>> tempMap = new HashMap<>();
                     tempMap.put(t, t2);
-                    name = t.getName();
-//                    System.out.println();
-//                    t2.forEach(System.out::print);
                     teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
                     break;
                 }
             }
-//            System.out.println(i);
-//            System.out.println(teacherStudentGroup.getTeacherStudentGroup().get(0));
-//            System.out.println(teacherStudentGroup.getTeacherStudentGroup().get(1));
             c1.getClassGroup().put("1B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
 
+        } else if (size >= 9 && size <= 12) {
+            System.out.println("Business.Configuration.ConfigureDayCare.initializeStudentTeacherGroup()");
+            List<Student> t1 = new ArrayList<>();
+            List<Student> t2 = new ArrayList<>();
+            List<Student> t3 = new ArrayList<>();
+
+            for (int j = 0; j < 4; j++) {
+                t1.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("6-12")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t1);
+                    name = t.getName();
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c1.getClassGroup().put("1A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 4; j < 8; j++) {
+                t2.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("6-12")) {
+                    if (t.getName().equals(name)) {
+                        continue;
+                    }
+                    name2 = t.getName();
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t2);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c1.getClassGroup().put("1B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 8; j < size; j++) {
+                t3.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("6-12")) {
+                    if (t.getName().equals(name) || t.getName().equals(name2)) {
+                        continue;
+                    }
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t3);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c1.getClassGroup().put("1C", teacherStudentGroup.getTeacherStudentGroup().get(i++));
         }
 
         tempList = personDirectory.getStudentDirectory().stream()
                 .filter(e -> e.getAge() >= 13 && e.getAge() <= 24)
                 .collect(Collectors.toList());
+        size = tempList.size();
 
-        for (Teacher t : personDirectory.getTeacherDirectory()) {
-            if (t.getCategory().equalsIgnoreCase("13-24")) {
-                Map<Teacher, List<Student>> tempMap = new HashMap<>();
-                tempMap.put(t, tempList);
-                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
-                break;
+        if (size <= 5) {
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("13-24")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, tempList);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
             }
+            c2.getClassGroup().put("2A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+        } else if (size >= 6 && size <= 10) {
+            List<Student> t1 = new ArrayList<>();
+            List<Student> t2 = new ArrayList<>();
+
+            for (int j = 0; j < 5; j++) {
+                t1.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("13-24")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t1);
+                    name = t.getName();
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c2.getClassGroup().put("2A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 5; j < size; j++) {
+                t2.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("13-24")) {
+                    if (t.getName().equals(name)) {
+                        continue;
+                    }
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t2);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c2.getClassGroup().put("2B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+        } else if (size >= 11 && size <= 15) {
+            List<Student> t1 = new ArrayList<>();
+            List<Student> t2 = new ArrayList<>();
+            List<Student> t3 = new ArrayList<>();
+
+            for (int j = 0; j < 5; j++) {
+                t1.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("13-24")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t1);
+                    name = t.getName();
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c2.getClassGroup().put("2A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 5; j < 10; j++) {
+                t2.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("13-24")) {
+                    if (t.getName().equals(name)) {
+                        continue;
+                    }
+                    name2 = t.getName();
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t2);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c2.getClassGroup().put("2B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 10; j < size; j++) {
+                t3.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("13-24")) {
+                    if (t.getName().equals(name) || t.getName().equals(name2)) {
+                        continue;
+                    }
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t3);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c2.getClassGroup().put("2C", teacherStudentGroup.getTeacherStudentGroup().get(i++));
         }
 
         tempList = personDirectory.getStudentDirectory().stream()
                 .filter(e -> e.getAge() >= 25 && e.getAge() <= 35)
                 .collect(Collectors.toList());
+        size = tempList.size();
 
-        for (Teacher t : personDirectory.getTeacherDirectory()) {
-            if (t.getCategory().equalsIgnoreCase("25-35")) {
-                Map<Teacher, List<Student>> tempMap = new HashMap<>();
-                tempMap.put(t, tempList);
-                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
-                break;
+        if (size <= 6) {
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("25-35")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, tempList);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
             }
+            c3.getClassGroup().put("3A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+        } else if (size >= 7 && size <= 12) {
+            List<Student> t1 = new ArrayList<>();
+            List<Student> t2 = new ArrayList<>();
+
+            for (int j = 0; j < 6; j++) {
+                t1.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("25-35")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t1);
+                    name = t.getName();
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c3.getClassGroup().put("3A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 6; j < size; j++) {
+                t2.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("25-35")) {
+                    if (t.getName().equals(name)) {
+                        continue;
+                    }
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t2);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c3.getClassGroup().put("3B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+        } else if (size >= 12 && size <= 17) {
+            List<Student> t1 = new ArrayList<>();
+            List<Student> t2 = new ArrayList<>();
+            List<Student> t3 = new ArrayList<>();
+
+            for (int j = 0; j < 6; j++) {
+                t1.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("25-35")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t1);
+                    name = t.getName();
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c3.getClassGroup().put("3A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 6; j < 12; j++) {
+                t2.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("25-35")) {
+                    if (t.getName().equals(name)) {
+                        continue;
+                    }
+                    name2 = t.getName();
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t2);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c3.getClassGroup().put("3B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 12; j < size; j++) {
+                t3.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("25-35")) {
+                    if (t.getName().equals(name) || t.getName().equals(name2)) {
+                        continue;
+                    }
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t3);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c3.getClassGroup().put("3C", teacherStudentGroup.getTeacherStudentGroup().get(i++));
         }
 
         tempList = personDirectory.getStudentDirectory().stream()
                 .filter(e -> e.getAge() >= 36 && e.getAge() <= 47)
                 .collect(Collectors.toList());
+        size = tempList.size();
 
-        for (Teacher t : personDirectory.getTeacherDirectory()) {
-            if (t.getCategory().equalsIgnoreCase("36-47")) {
-                Map<Teacher, List<Student>> tempMap = new HashMap<>();
-                tempMap.put(t, tempList);
-                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
-                break;
+        if (size <= 8) {
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("36-47")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, tempList);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
             }
+            c4.getClassGroup().put("4A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+        } else if (size >= 9 && size <= 16) {
+            List<Student> t1 = new ArrayList<>();
+            List<Student> t2 = new ArrayList<>();
+
+            for (int j = 0; j < 8; j++) {
+                t1.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("36-47")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t1);
+                    name = t.getName();
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c4.getClassGroup().put("4A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 8; j < size; j++) {
+                t2.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("36-47")) {
+                    if (t.getName().equals(name)) {
+                        continue;
+                    }
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t2);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c4.getClassGroup().put("4B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+        } else if (size >= 17 && size <= 24) {
+            List<Student> t1 = new ArrayList<>();
+            List<Student> t2 = new ArrayList<>();
+            List<Student> t3 = new ArrayList<>();
+
+            for (int j = 0; j < 8; j++) {
+                t1.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("36-47")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t1);
+                    name = t.getName();
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c4.getClassGroup().put("4A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 8; j < 16; j++) {
+                t2.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("36-47")) {
+                    if (t.getName().equals(name)) {
+                        continue;
+                    }
+                    name2 = t.getName();
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t2);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c4.getClassGroup().put("4B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 16; j < size; j++) {
+                t3.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("36-47")) {
+                    if (t.getName().equals(name) || t.getName().equals(name2)) {
+                        continue;
+                    }
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t3);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c4.getClassGroup().put("4C", teacherStudentGroup.getTeacherStudentGroup().get(i++));
         }
 
         tempList = personDirectory.getStudentDirectory().stream()
                 .filter(e -> e.getAge() >= 48 && e.getAge() <= 59)
                 .collect(Collectors.toList());
+        size = tempList.size();
 
-        for (Teacher t : personDirectory.getTeacherDirectory()) {
-            if (t.getCategory().equalsIgnoreCase("48-59")) {
-                Map<Teacher, List<Student>> tempMap = new HashMap<>();
-                tempMap.put(t, tempList);
-                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
-                break;
+        if (size <= 12) {
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("48-59")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, tempList);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
             }
+            c5.getClassGroup().put("5A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+        } else if (size >= 13 && size <= 24) {
+            List<Student> t1 = new ArrayList<>();
+            List<Student> t2 = new ArrayList<>();
+
+            for (int j = 0; j < 12; j++) {
+                t1.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("48-59")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t1);
+                    name = t.getName();
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c5.getClassGroup().put("5A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 12; j < size; j++) {
+                t2.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("48-59")) {
+                    if (t.getName().equals(name)) {
+                        continue;
+                    }
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t2);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c5.getClassGroup().put("5B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
         }
 
         tempList = personDirectory.getStudentDirectory().stream()
                 .filter(e -> e.getAge() >= 60)
                 .collect(Collectors.toList());
+        size = tempList.size();
 
-        for (Teacher t : personDirectory.getTeacherDirectory()) {
-            if (t.getCategory().equalsIgnoreCase("60 above")) {
-                Map<Teacher, List<Student>> tempMap = new HashMap<>();
-                tempMap.put(t, tempList);
-                teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
-                break;
+        if (size <= 15) {
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("60 above")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, tempList);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
             }
+            c6.getClassGroup().put("6A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+        } else if (size >= 16 && size <= 30) {
+            List<Student> t1 = new ArrayList<>();
+            List<Student> t2 = new ArrayList<>();
+
+            for (int j = 0; j < 15; j++) {
+                t1.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("60 above")) {
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t1);
+                    name = t.getName();
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c6.getClassGroup().put("6A", teacherStudentGroup.getTeacherStudentGroup().get(i++));
+
+            for (int j = 15; j < size; j++) {
+                t2.add(tempList.get(j));
+            }
+            for (Teacher t : personDirectory.getTeacherDirectory()) {
+                if (t.getCategory().equalsIgnoreCase("60 above")) {
+                    if (t.getName().equals(name)) {
+                        continue;
+                    }
+                    Map<Teacher, List<Student>> tempMap = new HashMap<>();
+                    tempMap.put(t, t2);
+                    teacherStudentGroup.getTeacherStudentGroup().add(tempMap);
+                    break;
+                }
+            }
+            c6.getClassGroup().put("6B", teacherStudentGroup.getTeacherStudentGroup().get(i++));
         }
     }
 

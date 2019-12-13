@@ -139,6 +139,8 @@ public class ManageStudents extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         backBtn2 = new javax.swing.JButton();
         pageTitle = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        idTxtField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -315,6 +317,11 @@ public class ManageStudents extends javax.swing.JPanel {
         pageTitle.setForeground(new java.awt.Color(255, 255, 255));
         pageTitle.setText("Add Student");
 
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("ID:");
+
+        idTxtField1.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -326,23 +333,17 @@ public class ManageStudents extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(backBtn2)
-                                .addGap(190, 190, 190)
+                                .addGap(225, 225, 225)
                                 .addComponent(pageTitle))
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel8)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel2)
-                                            .addComponent(jLabel10)
                                             .addComponent(jLabel19))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(nameTxtField)
-                                            .addComponent(idTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(45, 45, 45)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel1)
                                             .addComponent(jLabel3))
@@ -352,7 +353,15 @@ public class ManageStudents extends javax.swing.JPanel {
                                                 .addComponent(birthDateTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(4, 4, 4)
-                                                .addComponent(ageTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(ageTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(idTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel29)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(idTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(100, 100, 100)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel4)
@@ -365,6 +374,8 @@ public class ManageStudents extends javax.swing.JPanel {
                                     .addComponent(mNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(addressTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(phoneTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel8)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -467,7 +478,7 @@ public class ManageStudents extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(hepatitisb3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(302, 302, 302)
+                        .addGap(312, 312, 312)
                         .addComponent(confirmBtn)))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
@@ -514,7 +525,11 @@ public class ManageStudents extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(phoneTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(idTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
@@ -576,9 +591,9 @@ public class ManageStudents extends javax.swing.JPanel {
                     .addComponent(varicella1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel35)
                     .addComponent(varicella2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addGap(18, 18, 18)
                 .addComponent(confirmBtn)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -744,32 +759,38 @@ public class ManageStudents extends javax.swing.JPanel {
         if (mode.equals("add")) {
 
             if (age >= 6 && age <= 12) {
-//                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 6 && e.getAge() <= 12).count() == 4) {
-//                    JOptionPane.showMessageDialog(null, "Cannot add more students of age 6-12");
-//                    return;
-//                }
+                long availableTeachers = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("6-12")).count();
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 6 && e.getAge() <= 12).count() >= (4 * availableTeachers)) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more students of age 6-12");
+                    return;
+                }
             } else if (age >= 13 && age <= 24) {
-                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 13 && e.getAge() <= 24).count() == 5) {
+                long availableTeachers = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("13-24")).count();
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 13 && e.getAge() <= 24).count() >= (5 * availableTeachers)) {
                     JOptionPane.showMessageDialog(null, "Cannot add more students of age 13-24");
                     return;
                 }
             } else if (age >= 25 && age <= 35) {
-                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 25 && e.getAge() <= 35).count() == 6) {
+                long availableTeachers = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("25-35")).count();
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 25 && e.getAge() <= 35).count() >= (6 * availableTeachers)) {
                     JOptionPane.showMessageDialog(null, "Cannot add more students of age 25-35");
                     return;
                 }
             } else if (age >= 36 && age <= 47) {
-                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 36 && e.getAge() <= 47).count() == 8) {
+                long availableTeachers = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("36-47")).count();
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 36 && e.getAge() <= 47).count() >= (8 * availableTeachers)) {
                     JOptionPane.showMessageDialog(null, "Cannot add more students of age 36-47");
                     return;
                 }
             } else if (age >= 48 && age <= 59) {
-                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 48 && e.getAge() <= 59).count() == 12) {
+                long availableTeachers = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("48-59")).count();
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 48 && e.getAge() <= 59).count() >= (12 * availableTeachers)) {
                     JOptionPane.showMessageDialog(null, "Cannot add more students of age 48-59");
                     return;
                 }
             } else if (age >= 60) {
-                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 60).count() == 15) {
+                long availableTeachers = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("60 above")).count();
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 60).count() >= (15 * availableTeachers)) {
                     JOptionPane.showMessageDialog(null, "Cannot add more students of age more than 59");
                     return;
                 }
@@ -874,6 +895,7 @@ public class ManageStudents extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> hib3;
     private javax.swing.JComboBox<String> hib4;
     private javax.swing.JTextField idTxtField;
+    private javax.swing.JTextField idTxtField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -895,6 +917,7 @@ public class ManageStudents extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel32;

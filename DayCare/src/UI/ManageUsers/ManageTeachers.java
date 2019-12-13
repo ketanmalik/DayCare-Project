@@ -275,17 +275,54 @@ public class ManageTeachers extends javax.swing.JPanel {
         String id = idTxtField.getText();
 
         if (mode.equals("add")) {
-            if (mode.equals("add")) {
-                TeacherStudentDirectory tsd = TeacherStudentDirectory.getObject();
-                tsd.getTeacherStudentGroup().clear();
-                ClassroomDirectory cd = ClassroomDirectory.getObject();
-                cd.getClassroomDirectory().clear();
-                ConfigureDayCare.initializeClassroomGroup();
-                ConfigureDayCare.initializeStudentTeacherGroup();
-                DbManagement.saveToTeacherDB(id, name, ageTxtField.getText(), wageTxtField.getText(), category, dateOfJoining);
-                AbstractPerson teacher = new TeacherFactory().getObjectFromUI(Integer.parseInt(idTxtField.getText()), name, age, wage, category, dateOfJoining);
-                personDirectory.getTeacherDirectory().add((Teacher) teacher);
+            if (category.equals("6-12")) {
+                long count = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("6-12")).count();
+                if (count == 3) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more teachers in 6-12 age category", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } else if (category.equals("13-24")) {
+                long count = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("13-24")).count();
+                if (count == 3) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more teachers in 13-24 age category", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } else if (category.equals("25-35")) {
+                long count = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("25-35")).count();
+                if (count == 3) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more teachers in 25-35 age category", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } else if (category.equals("36-47")) {
+                long count = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("36-47")).count();
+                if (count == 3) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more teachers in 36-47 age category", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } else if (category.equals("48-59")) {
+                long count = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("48-59")).count();
+                if (count == 2) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more teachers in 48-59 age category", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } else if (category.equals("60 above")) {
+                long count = personDirectory.getTeacherDirectory().stream().filter(e -> e.getCategory().equals("60 above")).count();
+                if (count == 2) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more teachers in 60 above age category", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
+
+            TeacherStudentDirectory tsd = TeacherStudentDirectory.getObject();
+            tsd.getTeacherStudentGroup().clear();
+            ClassroomDirectory cd = ClassroomDirectory.getObject();
+            cd.getClassroomDirectory().clear();
+            ConfigureDayCare.initializeClassroomGroup();
+            ConfigureDayCare.initializeStudentTeacherGroup();
+            DbManagement.saveToTeacherDB(id, name, ageTxtField.getText(), wageTxtField.getText(), category, dateOfJoining);
+            AbstractPerson teacher = new TeacherFactory().getObjectFromUI(Integer.parseInt(idTxtField.getText()), name, age, wage, category, dateOfJoining);
+            personDirectory.getTeacherDirectory().add((Teacher) teacher);
+
         } else if (mode.equals("update")) {
             DbManagement.updateToTeacherDB(name, ageTxtField.getText(), wageTxtField.getText(), category, dateOfJoining, String.valueOf(teacher.getId()));
             updateTeacherInDirectory(name, age, wage, category, dateOfJoining);

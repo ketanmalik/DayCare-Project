@@ -19,6 +19,10 @@ import UI.ManageUsers.ManageStudents;
 import UI.ManageUsers.ManageTeachers;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -334,16 +338,32 @@ public class HomePage extends javax.swing.JPanel {
         int selectedRow = tchrTbl.getSelectedRow();
         if (selectedRow >= 0) {
             int id = (Integer) tchrTbl.getValueAt(selectedRow, 0);
+            ClassroomDirectory cd = ClassroomDirectory.getObject();
+            TeacherStudentDirectory tsd = TeacherStudentDirectory.getObject();
+            for (Map<Teacher, List<Student>> m : tsd.getTeacherStudentGroup()) {
+                Map<Teacher, List<Student>> temp = new HashMap<>();
+                temp = m;
+                Set<Teacher> keySet = temp.keySet();
+                for (Teacher t : keySet) {
+                    if (t.getId() == id) {
+                        System.out.println("Found id: " + t.getId());
+                        if (temp.get(t) != null || temp.get(t).size() != 0) {
+                            JOptionPane.showMessageDialog(null, "This teacher has associated students. Please remove students first", "Invalid Operation", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        break;
+                    }
+                }
+            }
+
             DbManagement.deleteFromTeacherDB(String.valueOf(id));
             if (personDirectory.getTeacherDirectory().contains(tchrTbl.getValueAt(selectedRow, 1))) {
                 personDirectory.getTeacherDirectory().remove(tchrTbl.getValueAt(selectedRow, 1));
             }
-            TeacherStudentDirectory tsd = TeacherStudentDirectory.getObject();
             tsd.getTeacherStudentGroup().clear();
-            ClassroomDirectory cd = ClassroomDirectory.getObject();
             cd.getClassroomDirectory().clear();
-            ConfigureDayCare.initializeStudentTeacherGroup();
             ConfigureDayCare.initializeClassroomGroup();
+            ConfigureDayCare.initializeStudentTeacherGroup();
             populateTeacherTable();
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to delete", "No selection found", JOptionPane.ERROR_MESSAGE);
