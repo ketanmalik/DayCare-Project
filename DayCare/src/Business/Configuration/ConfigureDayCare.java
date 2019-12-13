@@ -97,13 +97,14 @@ public class ConfigureDayCare {
         }
     }
 
-    public final void initializeStudentTeacherGroup() {
+    public static final void initializeStudentTeacherGroup() {
         List<Student> tempList = new ArrayList<>();
 
         tempList = personDirectory.getStudentDirectory().stream()
                 .filter(e -> e.getAge() >= 6 && e.getAge() <= 12)
                 .collect(Collectors.toList());
 
+  
         for (Teacher t : personDirectory.getTeacherDirectory()) {
             if (t.getCategory().equalsIgnoreCase("6-12")) {
                 Map<Teacher, List<Student>> tempMap = new HashMap<>();
@@ -179,7 +180,7 @@ public class ConfigureDayCare {
         }
     }
 
-    public final void initializeClassroomGroup() {
+    public static final void initializeClassroomGroup() {
         ClassroomFactory classroomFactory = new ClassroomFactory();
         Classroom c1 = classroomFactory.getObj("1", 12);
         Classroom c2 = classroomFactory.getObj("2", 15);

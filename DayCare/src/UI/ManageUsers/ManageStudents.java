@@ -5,6 +5,8 @@
  */
 package UI.ManageUsers;
 
+import Business.Configuration.ConfigureDayCare;
+import Business.Directories.ClassroomDirectory;
 import Business.Directories.PersonDirectory;
 import Business.Entities.AbstractPerson;
 import Business.Entities.Student;
@@ -33,9 +35,11 @@ public class ManageStudents extends javax.swing.JPanel {
     private String mode = "";
     private PersonDirectory personDirectory;
     private Student student;
+    private ClassroomDirectory cd;
 
     public ManageStudents(JPanel displayPanel, String mode, Student student) {
         initComponents();
+        cd = ClassroomDirectory.getObject();
         this.displayPanel = displayPanel;
         this.personDirectory = PersonDirectory.getObject();
         this.mode = mode;
@@ -737,6 +741,39 @@ public class ManageStudents extends javax.swing.JPanel {
         String varicella = varicella1.concat(",").concat(varicella2);
 
         if (mode.equals("add")) {
+            if (age >= 6 && age <= 12) {
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 6 && e.getAge() <= 12).count() == 4) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more students of age 6-12");
+                    return;
+                }
+            } else if (age >= 13 && age <= 24) {
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 13 && e.getAge() <= 24).count() == 5) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more students of age 13-24");
+                    return;
+                }
+            } else if (age >= 25 && age <= 35) {
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 25 && e.getAge() <= 35).count() == 6) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more students of age 25-35");
+                    return;
+                }
+            } else if (age >= 36 && age <= 47) {
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 36 && e.getAge() <= 47).count() == 8) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more students of age 36-47");
+                    return;
+                }
+            } else if (age >= 48 && age <= 59) {
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 48 && e.getAge() <= 59).count() == 12) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more students of age 48-59");
+                    return;
+                }
+            } else if (age >= 60) {
+                if (personDirectory.getStudentDirectory().stream().filter(e -> e.getAge() >= 60).count() == 15) {
+                    JOptionPane.showMessageDialog(null, "Cannot add more students of age more than 59");
+                    return;
+                }
+            }
+//            ConfigureDayCare.initializeStudentTeacherGroup();
+//            ConfigureDayCare.initializeClassroomGroup();
             DbManagement.saveToStudentDB(id, name, ageTxtField.getText(), fName, mName, address, phoneNo, grade, hib, dtap, polio, hepatitisb, mmr, varicella, registerDate, bday);
             AbstractPerson student = new StudentFactory().getObjectFromUI(Integer.parseInt(idTxtField.getText()), name, age, fName, mName, address, phoneNo, Double.parseDouble(grade), registerDate, bday, hib, dtap, polio, hepatitisb, mmr, varicella);
             personDirectory.getStudentDirectory().add((Student) student);
